@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <h1>Export the csv file</h1>
+    <script>
+      const exportCSV = (str) => {
+        // 表格标题
+        let content = '#,类型,状态,产量\r\n'
+        // 表格内容
+        content += '0,普通,正常,无\r\n'
+        // 实例化Blob对象
+        const blobData = new Blob([content], { type: 'text/csv' })
+        // 创建 a 标签
+        let a = window.document.createElement('a')
+        a.href = window.URL.createObjectURL(blobData, { type: 'text/plain' })
+        a.download = 'export.csv'
+        a.innerText = 'Export to csv'
+        document.body.appendChild(a)
+      }
+      exportCSV()
+    </script>
+  </body>
+</html>
