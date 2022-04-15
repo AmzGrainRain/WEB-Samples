@@ -14,4 +14,5 @@ const emptyDir = (dirPath) => {
         })
     })
 }
+
 emptyDir('./dir/')
