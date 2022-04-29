@@ -1,4 +1,4 @@
-let data = [
+const markData = [
     {lat:42.35843,lng:-71.05977, label: "Boston"},
     {lat:25.77427,lng:-80.19366, label: "Miami"},
     {lat:37.77493,lng:-122.41942, label: "San Francisco"},
@@ -16,3 +16,4 @@ let data = [
     {lat:55.95206,lng:-3.19648, label:"Edinburgh"},
     {lat:55.75222,lng:37.61556, label:"Moscow"},
 ]
+export default markData

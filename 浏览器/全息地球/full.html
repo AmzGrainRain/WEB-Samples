@@ -16,10 +16,11 @@
     </style>
   </head>
   <body>
-    <script src="./data/grid.js"></script>
-    <script src="./data/data.js"></script>
     <script src="./js/encom-globe.min.js"></script>
-    <script>
+    <script type="module">
+      import tiles from './js/tiles.js'
+      import markData from './js/mark.js'
+
       /* 创建地球 */
       const createEarth = (args) => {
         window.earth = new ENCOM.Globe(window.innerWidth, window.innerHeight, {
@@ -89,8 +90,8 @@
         )
         createEarth({
           font: 'monospace',                            // 字体
-          tiles: grid.tiles,                            // tiles 数据
-          data: data.slice(),                           // 标记数据
+          tiles: tiles,                                 // tiles 数据
+          data: markData.slice(),                           // 标记数据
           markerColor: '#ffcc00',                       // 标记颜色
           baseColor: '#ffcc00',                         // 基本颜色
           pinColor: '#8fd8d8',                          // 点颜色

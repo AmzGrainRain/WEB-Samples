@@ -16,13 +16,13 @@
     </style>
   </head>
   <body>
-    <script src="data/grid.js"></script>
-    <script src="js/encom-globe.min.js"></script>
-    <script>
+    <script src="./js/encom-globe.min.js"></script>
+    <script type="module">
+      import tiles from './js/tiles.js'
       function createGlobe() {
         window.globe = new ENCOM.Globe(window.innerWidth, window.innerHeight, {
           font: 'Inconsolata',
-          tiles: grid.tiles,
+          tiles: tiles,
           baseColor: '#ffcc00',
           dayLength: 1000 * 28, // [1, 120]
           scale: 1,
