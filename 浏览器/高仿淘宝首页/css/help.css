@@ -1,0 +1,37 @@
+#help {
+  display: flex;
+  justify-content: space-around;
+  margin: 0 auto;
+  padding: 16px 16px 32px 16px;
+  width: 1190px;
+  box-sizing: border-box;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  background-color: #fff;
+}
+#help .item {
+  width: 250px;
+}
+#help .item .title {
+  display: flex;
+  align-items: center;
+  height: 32px;
+}
+#help .item .title h4 {
+  font-size: 16px;
+  text-indent: 12px;
+}
+#help .item .title span {
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  background-color: #888;
+}
+#help .item ul {
+  padding-top: 16px;
+}
+#help .item ul li {
+  float: left;
+  margin-right: 10px;
+  color: #999;
+}

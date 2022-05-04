@@ -1,0 +1,109 @@
+footer {
+  margin-top: 32px;
+  width: 100%;
+  line-height: 2;
+  background-color: #fff;
+}
+footer .content {
+  margin: 0 auto;
+  padding: 16px 0;
+  width: 1190px;
+  box-sizing: border-box;
+}
+footer .content .hd b,
+footer .content .bd div b {
+  color: #eee;
+}
+footer .content .hd span,
+footer .content .bd div span {
+  margin: 0 2px;
+  color: #888;
+}
+footer .content .hd span:first-child,
+footer .content .bd div span:first-child {
+  margin-left: 0;
+}
+footer .content .hd span:hover,
+footer .content .bd .sec1 span:hover,
+footer .content .bd .sec2 span:hover {
+  color: #ff5500;
+}
+
+footer .content .bd .sec1 {
+  display: inline-block;
+}
+footer .content .bd > em {
+  margin-left: 20px;
+  color: #9c9c9c;
+  font-style: normal;
+}
+footer .content .bd .sec3 span,
+footer .content .bd .sec4 span {
+  color: #acacac;
+}
+footer .content .bd .sec4 .bean {
+  margin-right: 8px;
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  background-image: url('../img/bean.jpg');
+  background-position-x: -861px;
+  transform: translateY(4px);
+}
+footer .content .bd .sec4 .hover {
+  color: #666;
+}
+footer .content .bd .sec4 .hover:hover {
+  color: #ff5500;
+}
+footer .content .ft a {
+  margin-right: 20px;
+  display: inline-block;
+  height: 40px;
+  background-image: url('../img/bean.jpg');
+  background-repeat: no-repeat;
+  vertical-align: middle;
+}
+footer .content .ft a:nth-child(1) {
+  width: 30px;
+  height: 36px;
+}
+footer .content .ft a:nth-child(2) {
+  width: 50px;
+  background-position-x: -80px;
+}
+footer .content .ft a:nth-child(3) {
+  width: 83px;
+  background-position-x: -140px;
+}
+footer .content .ft a:nth-child(4) {
+  width: 250px;
+  background-image: url('../img/footer/wsyhxxjbzq.png');
+  background-position: 0px -18px;
+}
+footer .content .ft a:nth-child(5) {
+  width: 105px;
+  background-position-x: -650px;
+}
+footer .content .ft a:nth-child(6) {
+  width: 82px;
+  background-position-x: -345px;
+}
+footer .content .ft a:nth-child(7) {
+  width: 97px;
+  background-position-x: -761px;
+}
+footer .content .ft a:nth-child(8) {
+  width: 249px;
+  background-position-x: -884px;
+}
+footer .content .ft a:nth-child(9) {
+  width: 249px;
+  background-image: url('../img/footer/qgshdfgzxzbgs.jpg');
+}
+footer .content .ft a:nth-child(10) {
+  width: 148px;
+  height: 71px;
+  background-image: url('../img/footer/slhwzafw.png');
+  background-size: cover;
+}

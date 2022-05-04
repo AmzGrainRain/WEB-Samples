@@ -1,0 +1,144 @@
+#list {
+  margin: 0 auto;
+  padding: 0 16px 16px 16px;
+  width: 1190px;
+  box-sizing: border-box;
+  background-color: #fff;
+}
+#list > div .title {
+  margin-bottom: 8px;
+  display: flex;
+  align-items: center;
+}
+#list > div .title h3 {
+  font-size: 24px;
+}
+#list > div .title span {
+  margin-left: 8px;
+  padding: 2px 6px;
+  color: #fff;
+  font-weight: bold;
+  border-radius: 4px;
+}
+/* 有好货 */
+#list .goods .title span {
+  background-image: linear-gradient(to right,#1fa8fc 0,#0795ed 100%);
+}
+#list .goods .mod {
+  display: flex;
+  justify-content: space-between;
+}
+#list .goods .mod .item {
+  width: 215px;
+}
+#list .goods .mod .item:hover a img {
+  opacity: .9;
+}
+#list .goods .mod .item:hover a h4 {
+  color: #ff5500;
+}
+#list .goods .mod .item a {
+  display: block;
+  width: 100%;
+  font-weight: lighter;
+}
+#list .goods .mod .item a h4,
+#list .goods .mod .item a span {
+  display: inline-block;
+  width: 100%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+#list .goods .mod .item a h4 {
+  font-size: 16px;
+  font-weight: inherit;
+  transition: .3s;
+}
+#list .goods .mod .item a span {
+  font-size: 14px;
+  color: #999;
+}
+#list .goods .mod .item a img {
+  width: 100%;
+  border-radius: 12px;
+  transition: .3s;
+}
+/* 猜你喜欢 */
+#list .suppose .title span {
+  background-image: linear-gradient(to right,#ff8000 0,#ff5000 100%);
+}
+#list .suppose .mod {
+  display: flex;
+  flex-flow: row wrap;
+}
+#list .suppose .mod .item {
+  margin: 0 5px 8px 5px;
+  padding: 4px;
+  width: 215px;
+  border-radius: 12px;
+  transition: .2s;
+}
+#list .suppose .mod .item:first-child {
+  margin-left: 0;
+}
+#list .suppose .mod .item:nth-child(5n) {
+  margin-right: 0;
+}
+#list .suppose .mod .item:nth-child(5n + 1) {
+  margin-left: 0;
+}
+#list .suppose .mod .item:hover {
+  box-shadow: 0 0 16px #ddd;
+}
+#list .suppose .mod .item:hover a img {
+  opacity: .9;
+}
+#list .suppose .mod .item:hover a h4 {
+  color: #ff5500;
+}
+#list .suppose .mod .item a {
+  display: block;
+  width: 100%;
+  font-weight: lighter;
+}
+#list .suppose .mod .item a h4 {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  width: 100%;
+  font-size: 16px;
+  font-weight: inherit;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  transition: .2s;
+}
+#list .suppose .mod .item a h4 span {
+  display: none;
+  margin-right: 2px;
+  padding: 1px 5px;
+  color: #fff;
+  font-size: 12px;
+  border-radius: 4px;
+  background-image: linear-gradient(to right,#ff8000 0,#ff5000 100%);
+  transform: scale(.8) translateY(-2px);
+}
+#list .suppose .mod .item a h4.hot span {
+  display: inline-block;
+}
+#list .suppose .mod .item a .money {
+  margin: 8px 0;
+  color: #ff5000;
+  font-weight: bold;
+  font-family: 'Microsoft Yahei';
+  font-size: 18px;
+}
+#list .suppose .mod .item a .money em {
+  font-style: normal;
+  font-size: 12px;
+}
+#list .suppose .mod .item a img {
+  width: 100%;
+  border-radius: 12px;
+  transition: .2s;
+}

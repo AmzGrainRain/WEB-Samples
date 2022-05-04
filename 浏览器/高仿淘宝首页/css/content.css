@@ -1,0 +1,382 @@
+#content {
+  margin: 0 auto;
+  padding: 8px 16px;
+  width: 1190px;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  box-sizing: border-box;
+  background-color: #fff;
+}
+/*
+
+  内容页页头
+
+*/
+#content header {
+  display: flex;
+  align-items: center;
+  height: 30px;
+  font-size: 16px;
+  line-height: 30px;
+}
+#content header h2 {
+  width: 210px;
+  text-align: center;
+  color: #ff6200;
+  font-weight: bold;
+  font-size: inherit;
+}
+#content header ul li {
+  float: left;
+  margin: 0 10px;
+}
+#content header ul li a:hover {
+  color: #ff6200;
+}
+/*
+
+  容器
+
+*/
+#content .box {
+  padding-top: 8px;
+  display: flex;
+}
+/*
+
+  内容页导航栏
+
+*/
+#content .box nav {
+  display: inline-block;
+  width: 210px;
+  height: 520px;
+}
+#content .box nav ul li {
+  padding-bottom: 10px;
+}
+#content .box nav ul li:hover a {
+  color: #ff6200;
+}
+#content .box nav ul li a {
+  margin: 0 2px;
+  color: #666;
+  font-size: 16px;
+}
+#content .box nav ul li a:hover {
+  text-decoration: underline;
+}
+#content .box nav ul li i {
+  margin-right: 8px;
+  font-style: normal;
+  transform: translateY(-2px);
+}
+/*
+
+  淘宝轮播
+
+*/
+#content .box .carousel {
+  margin: 0 32px;
+  display: inline-block;
+  width: 520px;
+  height: 512px;
+}
+#content .box .carousel .tb {
+  position: relative;
+  width: 100%;
+  height: 280px;
+  border-radius: 12px;
+  user-select: none;
+  overflow: hidden;
+  background-color: pink;
+}
+#content .box .carousel .tb .tab {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 4px;
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 16px;
+  margin: auto;
+  width: fit-content;
+  text-align: center;
+  border-radius: 10px;
+  background-color: #fff6;
+  z-index: 1;
+}
+#content .box .carousel .tb .tab a {
+  margin: 0 2px;
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #fff;
+}
+#content .box .carousel .tb .tab a.active {
+  background-color: #ff5000;
+}
+/* 指示器 */
+#content .box .carousel .tb:hover .indicator-l,
+#content .box .carousel .tb:hover .indicator-r {
+  opacity: 1;
+}
+#content .box .carousel .tb .indicator-l,
+#content .box .carousel .tb .indicator-r {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  color: #fff;
+  line-height: 30px;
+  text-align: center;
+  background-color: #0003;
+  cursor: pointer;
+  transition: .3s;
+  z-index: 1;
+}
+#content .box .carousel .tb .indicator-l {
+  left: -6px;
+  border-top-right-radius: 50%;
+  border-bottom-right-radius: 50%;
+}
+#content .box .carousel .tb .indicator-r {
+  right: -6px;
+  border-top-left-radius: 50%;
+  border-bottom-left-radius: 50%;
+}
+#content .box .carousel .tb .indicator-l:hover,
+#content .box .carousel .tb .indicator-r:hover {
+  background-color: #0008;
+}
+/* 滚动内容 */
+#content .box .carousel .tb .mod {
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 500%;
+  height: 100%;
+  transition: 0.2s ease;
+}
+#content .box .carousel .tb .mod a {
+  display: inline-block;
+  width: 20%;
+  height: 100%;
+}
+/*
+
+  天猫轮播
+
+*/
+#content .box .carousel .tm .title {
+  padding-top: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 24px;
+}
+/* 左侧logo */
+#content .box .carousel .tm .title div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #999;
+}
+#content .box .carousel .tm .title div .hd-bg {
+  margin-right: 8px;
+  display: inline-block;
+  width: 74px;
+  height: 22px;
+}
+/* 右侧文字 */
+#content .box .carousel .tm .title span i {
+  color: #ff5000;
+  font-style: normal;
+}
+/* 轮播 */
+#content .box .carousel .tm .inner-carousel {
+  position: relative;
+  display: flex;
+  align-items: center;
+  height: 200px;
+  border-radius: 12px;
+  overflow: hidden;
+  background-color: #f6f6f6;
+}
+/* 指示器 */
+#content .box .carousel .tm .inner-carousel:hover .indicator-l,
+#content .box .carousel .tm .inner-carousel:hover .indicator-r {
+  opacity: 1;
+}
+#content .box .carousel .tm .inner-carousel .indicator-l,
+#content .box .carousel .tm .inner-carousel .indicator-r {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  display: inline-block;
+  width: 32px;
+  height: 32px;
+  color: #fff;
+  line-height: 30px;
+  text-align: center;
+  background-color: #0003;
+  cursor: pointer;
+  transition: .3s;
+  z-index: 1;
+}
+#content .box .carousel .tm .inner-carousel .indicator-l {
+  left: -6px;
+  border-top-right-radius: 50%;
+  border-bottom-right-radius: 50%;
+}
+#content .box .carousel .tm .inner-carousel .indicator-r {
+  right: -6px;
+  border-top-left-radius: 50%;
+  border-bottom-left-radius: 50%;
+}
+#content .box .carousel .tm .inner-carousel .indicator-l:hover,
+#content .box .carousel .tm .inner-carousel .indicator-r:hover {
+  background-color: #0008;
+}
+/* 滚动内容 */
+#content .box .carousel .tm .inner-carousel .mod {
+  display: flex;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  margin: auto;
+  width: 600%;
+  max-height: 190px;
+}
+#content .box .carousel .tm .inner-carousel .mod div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+#content .box .carousel .tm .inner-carousel .mod div a {
+  margin: 0 8px;
+  width: 100%;
+}
+#content .box .carousel .tm .inner-carousel .mod div a:nth-child(1) {
+  margin-right: 0;
+}
+#content .box .carousel .tm .inner-carousel .mod div a img {
+  width: 100%;
+  border-radius: 12px;
+}
+/*
+
+  个人信息
+
+*/
+#content .box .info {
+  padding: 12px;
+  width: 384px;
+  height: fit-content;
+  border-radius: 12px;
+  background-color: #f3f3f3;
+}
+/* 头像 */
+#content .box .info .head-portrait {
+  padding: 24px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column nowrap;
+  height: 72px;
+}
+#content .box .info .head-portrait img {
+  border-radius: 50%;
+}
+#content .box .info .head-portrait p {
+  margin: 8px 0;
+}
+/* 按钮组 */
+#content .box .info .btn-group {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#content .box .info .btn-group input {
+  margin: 0 4px;
+  width: 128px;
+  height: 32px;
+  color: #fff;
+  border: 0;
+  border-radius: 4px;
+  background-image: linear-gradient(to right,#ff5000 0,#ff6f06 100%);
+}
+/* 公告图 */
+#content .box .info .cover {
+  display: inline-block;
+  margin-top: 12px;
+  width: 100%;
+  overflow: hidden;
+}
+#content .box .info .cover img {
+  width: 100%;
+  border-radius: 6px;
+}
+/* 公告标题 */
+#content .box .info .notice {
+  width: 100%;
+}
+#content .box .info .notice p {
+  padding-left: 8px;
+  display: inline;
+  margin: 0;
+}
+/* 公告列表 */
+#content .box .info .notice-list {
+  padding: 8px 0;
+  width: 100%;
+}
+#content .box .info .notice-list li {
+  margin-bottom: 8px;
+}
+#content .box .info .notice-list li span {
+  padding: 1px 4px;
+  color: #ff5000;
+  font-weight: bold;
+  background-color: rgba(255,174,174,.2);
+}
+#content .box .info .notice-list li a {
+  padding-left: 8px;
+  color: #666;
+}
+/* 功能按钮 */
+#content .box .info .function-btn-group {
+  display: flex;
+  justify-content: space-around;
+}
+#content .box .info .function-btn-group a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-flow: column nowrap;
+  width: 64px;
+  height: 52px;
+}
+#content .box .info .function-btn-group a:hover {
+  color: #ff5000;
+}
+#content .box .info .function-btn-group a span {
+  display: inline-block;
+  width: 64px;
+  height: 36px;
+  background-color: #ccc;
+}
+#content .box .info .function-btn-group a p {
+  margin: 0;
+}
