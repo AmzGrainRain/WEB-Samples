@@ -1,0 +1,25 @@
+div.theme {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  backdrop-filter: blur(1rem);
+  background-color: var(--page-bg);
+  box-shadow: 0 0 .5rem var(--page-bg-reverse);
+  transition: .2s;
+  z-index: 999;
+  cursor: pointer;
+}
+
+div.theme i {
+  pointer-events: none;
+}
+
+div.theme:hover {
+  background-color: var(--page-bg-opactiy);
+}

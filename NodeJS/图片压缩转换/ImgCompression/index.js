@@ -3,8 +3,8 @@ const sharp = require('sharp')
 
 const originPath = './img/origin'
 const outputPath = './img/output'
-const originFolder = fs.readdirSync(originPath)
-const outputFolder = fs.readdirSync(outputPath)
+const originFolder = fs.readdirSync(originPath).sort((a, b) => a - b)
+const outputFolder = fs.readdirSync(outputPath).sort((a, b) => a - b)
 
 // 打印错误信息
 const logErr = (title = '异常捕获', file, rea, remarks, scheme) => {
@@ -33,7 +33,7 @@ if (originFolder.length) {
     // 转换图片
     sharp(`${originPath}/${fileName}`)
       .jpeg({
-        quality: 80,
+        quality: 100,
       })
       .toFile(`${outputPath}/${names[0]}.jpg`)
       .then(() => {
