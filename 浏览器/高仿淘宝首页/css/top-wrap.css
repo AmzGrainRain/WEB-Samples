@@ -15,10 +15,13 @@
   width: 630px;
 }
 #top-wrap .search .box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
   height: 40px;
   border-radius: 20px;
-  border: 1px solid #ff5000;
+  border: 2px solid #ff5000;
   background-color: #fff;
 }
 #top-wrap .search .box .drop-down {
@@ -60,13 +63,15 @@
 }
 #top-wrap .search .box input[type=button] {
   color: #fff;
-  width: 69px;
-  height: 36px;
-  border-radius: 20px;
+  width: 70px;
+  height: 90%;
+  border-radius: 17px;
   border: 0;
   box-sizing: border-box;
+  line-height: 90%;
   cursor: pointer;
   background-image: linear-gradient(to right,#ff9000 0,#ff5000 100%);
+  transform: translateX(-2px);
 }
 #top-wrap .search .search-hot-lines {
   padding-top: 6px;

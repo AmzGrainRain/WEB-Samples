@@ -43,7 +43,6 @@ io.use((socket, next) => {
 let conn = 0
 // 建立连接时触发
 io.on('connection', (socket) => {
-  console.log(socket.request.session)
   conn += 1
   console.log(`与 [ ${ socket.id } ] 建立连接`)
   console.log(`当前在线人数: ${ conn }\n`)
