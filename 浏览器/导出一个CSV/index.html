@@ -5,25 +5,71 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
+	<style type="text/css">
+		body {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			flex-flow: column wrap;
+		}
+		
+		body * {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+		}
+		
+		input,
+		textarea,
+		button {
+			padding: 8px 4px;
+			width: 80%;
+			outline: none;
+			/* resize: none; */
+		}
+	</style>
   </head>
   <body>
-    <h1>Export the csv file</h1>
+    <h1>JS 导出 CSV 文件</h1>
+	<br>
+	<input id="file-name" type="text" value="表格名字" title="表格名字" />
+	<br>
+	<input id="th" type="text" value="列头1,列头2,列头3,列头4" title="表格标题行" />
+	<br>
+	<textarea id="tb" title="表格内容（回车多行）">内容1,内容2,内容3,内容4</textarea>
+	<br>
+	<button onclick="exportCSV()">导出CSV</button>
+	
     <script>
       const exportCSV = (str) => {
+		// 文件名
+		const fileName = document.querySelector('input#file-name').value
+	
         // 表格标题
-        let content = '#,类型,状态,产量\r\n'
+		const title = document.querySelector('input#th').value + '\r\n'
+		
         // 表格内容
-        content += '0,普通,正常,无\r\n'
+		const content = document.querySelector('textarea#tb').value.split('\n')
+        
+		// 合并数据
+		let tableData = title
+		content.forEach(line => {
+		  tableData += line + '\r\n'
+		})
+		
         // 实例化Blob对象
-        const blobData = new Blob([content], { type: 'text/csv' })
+        const tableblobData = new Blob([tableData], {
+		  type: 'text/csv',
+		})
+		
         // 创建 a 标签
-        let a = window.document.createElement('a')
-        a.href = window.URL.createObjectURL(blobData, { type: 'text/plain' })
-        a.download = 'export.csv'
-        a.innerText = 'Export to csv'
+        const a = document.createElement('a')
+        a.href = URL.createObjectURL(tableblobData, {type: 'text/plain'})
+        a.download = fileName + '.csv'
         document.body.appendChild(a)
+		a.click()
+		a.remove()
       }
-      exportCSV()
     </script>
   </body>
 </html>

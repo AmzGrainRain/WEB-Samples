@@ -1,0 +1,42 @@
+.ico {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-image: url(../images/icon.png);
+    background-repeat: no-repeat;
+    background-position: var(--pos-x) var(--pos-y);
+    cursor: default;
+}
+
+.ico-dv {
+    --pos-x: 2px;
+    --pos-y: -388px;
+}
+.ico-eye {
+    --pos-x: 2px;
+    --pos-y: -1187px;
+}
+.ico-arrow-bottom {
+    --pos-x: 6px;
+    --pos-y: -968px;
+}
+.ico-arrow-right {
+    --pos-x: 7px;
+    --pos-y: -727px;
+}
+.ico-search {
+    --pos-x: 3px;
+    --pos-y: -1103px;
+}
+.ico-news {
+    --pos-x: 2px;
+    --pos-y: -1013px;
+}
+.ico-heart {
+    --pos-x: 5px;
+    --pos-y: -1308px;
+}
+.ico-refresh {
+    --pos-x: 5px;
+    --pos-y: -1385px;
+}

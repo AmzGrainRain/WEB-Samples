@@ -32,13 +32,13 @@
 
     <script>
         function time() {
-            let localDate = new Date();
-            let YYYY = localDate.getFullYear(),
-                MM = localDate.getMonth()+1 < 10 ? `0${localDate.getMonth()+1}` : localDate.getMonth()+1,
-                DD = localDate.getDay()+7 < 10 ? `0${localDate.getDay()+7}` : localDate.getDay()+7,
-                hh = localDate.getHours() < 10 ? `0${localDate.getHours()}` : localDate.getHours(),
-                mm = localDate.getMinutes() < 10 ? `0${localDate.getMinutes()}` : localDate.getMinutes(),
-                ss = localDate.getSeconds() < 10 ? `0${localDate.getSeconds()}` : localDate.getSeconds();
+            const localDate = new Date();
+            const YYYY = localDate.getFullYear()
+            const MM = localDate.getMonth()+1 < 10 ? `0${localDate.getMonth()+1}` : localDate.getMonth()+1
+            const DD = localDate.getDay()+7 < 10 ? `0${localDate.getDay()+7}` : localDate.getDay()+7
+            const hh = localDate.getHours() < 10 ? `0${localDate.getHours()}` : localDate.getHours()
+            const mm = localDate.getMinutes() < 10 ? `0${localDate.getMinutes()}` : localDate.getMinutes()
+            const ss = localDate.getSeconds() < 10 ? `0${localDate.getSeconds()}` : localDate.getSeconds()
 
             return `${YYYY}-${MM}-${DD} ${hh}:${mm}:${ss}`;
         }

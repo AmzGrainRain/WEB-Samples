@@ -1,5 +1,5 @@
 import { createServer as createHttpServer } from 'http'
-import * as fs from 'fs'
+// import * as fs from 'fs'
 import express from 'express'
 import session from 'express-session'
 import { Server as socketIO } from 'socket.io'
@@ -20,24 +20,24 @@ const sessionMiddleware = session({
 })
 app.use(sessionMiddleware)
 
-app.get("/login", (req, res) => {
-  req.session.authenticated = true
-  res.status(204).end()
-})
+// app.get("/login", (req, res) => {
+//   req.session.authenticated = true
+//   res.status(204).end()
+// })
 
 // 创建 socket 服务器
 const io = new socketIO(httpServer)
 // 共享 express-session 数据
-const wrap = middleware => (socket, next) => middleware(socket.request, {}, next)
-io.use(wrap(sessionMiddleware))
+// const wrap = middleware => (socket, next) => middleware(socket.request, {}, next)
+// io.use(wrap(sessionMiddleware))
 
 // 鉴权
-io.use((socket, next) => {
-  console.log(socket.request.session)
-  const session = socket.request.session
-  if (session && session.authenticated) next()
-  else next(new Error("unauthorized"))
-})
+// io.use((socket, next) => {
+//   console.log(socket.request.session)
+//   const session = socket.request.session
+//   if (session && session.authenticated) next()
+//   else next(new Error("unauthorized"))
+// })
 
 // 记录在线人数
 let conn = 0
