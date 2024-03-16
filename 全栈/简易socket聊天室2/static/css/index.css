@@ -1,0 +1,61 @@
+@import url('./nav.css');
+@import url('./login.css');
+@import url('./register.css');
+@import url('./chat.css');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'LXGW Neo XiHei' !important;
+  height: 100vh;
+  overflow: hidden;
+  background-color: #7e81be;
+  background-image: radial-gradient(closest-side, rgba(169, 201, 255, 1), rgba(255, 187, 236, 0)),
+    radial-gradient(closest-side, rgba(116, 235, 213, 1), rgba(244, 208, 63, 0)),
+    radial-gradient(closest-side, rgba(250, 172, 168, 1), rgba(82, 172, 255, 0)),
+    radial-gradient(closest-side, rgba(181, 255, 252, 1), rgba(255, 222, 233, 0)),
+    radial-gradient(closest-side, rgba(217, 175, 217, 1), rgba(151, 217, 225, 0));
+  background-size: 130vmax 130vmax, 80vmax 80vmax, 90vmax 90vmax, 110vmax 110vmax, 90vmax 90vmax;
+  background-position: -80vmax -80vmax, 60vmax -30vmax, 10vmax 10vmax, -30vmax -10vmax,
+    50vmax 50vmax;
+  background-repeat: no-repeat;
+  animation: 12s ani linear infinite;
+}
+
+@keyframes ani {
+  0%,
+  100% {
+    background-size: 130vmax 130vmax, 80vmax 80vmax, 90vmax 90vmax, 110vmax 110vmax, 90vmax 90vmax;
+    background-position: -80vmax -80vmax, 60vmax -30vmax, 10vmax 10vmax, -30vmax -10vmax,
+      50vmax 50vmax;
+  }
+  25% {
+    background-size: 100vmax 100vmax, 90vmax 90vmax, 100vmax 100vmax, 90vmax 90vmax, 60vmax 60vmax;
+    background-position: -60vmax -80vmax, 50vmax -30vmax, 0vmax 10vmax, -40vmax 0vmax, 60vmax 60vmax;
+  }
+}
+
+.hover {
+  transition: 0.3s;
+}
+.hover:hover {
+  background-color: #fff;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  height: calc(100% - 4rem);
+}
+

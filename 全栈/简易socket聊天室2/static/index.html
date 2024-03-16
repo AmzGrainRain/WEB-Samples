@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zh">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/index.css" />
+  </head>
+  <body>
+    <nav>
+      <h1 class="motd">MOTD</h1>
+      <div>
+        <input class="register hover" type="button" value="注 册" placeholder="click me" />
+        <input class="login hover" type="button" value="登 录" placeholder="click me" />
+        <input class="logout hover" type="button" value="退出登录" placeholder="点击退出登录" />
+      </div>
+    </nav>
+
+    <main>
+      <div class="login" style="display: none">
+        <h2>—&nbsp;登录&nbsp;———————————</h2>
+        <input type="email" placeholder="邮箱账号" name="email" value="amzgrainrain@outlook.com">
+        <input type="password" minlength="8" placeholder="密码" name="password" value="111111111">
+        <div class="captcha">
+          <input type="text" placeholder="输入验证码" name="captcha">
+          <img src="" alt="验证码">
+        </div>
+        <input class="hover pointer" type="button" value="验证身份" name="login">
+      </div>
+
+      <div class="register" style="display: none">
+        <h2>—&nbsp;注册&nbsp;———————————</h2>
+        <input type="email" placeholder="邮箱账号" name="email" value="amzgrainrain@outlook.com">
+        <input type="password" minlength="8" placeholder="密码" name="password" value="111111111">
+        <input type="password" minlength="8" placeholder="确认密码" name="confirm" value="111111111">
+        <div class="captcha">
+          <input type="text" placeholder="输入验证码" name="captcha">
+          <img src="" alt="验证码">
+        </div>
+        <input type="button" value="登录" name="login">
+      </div>
+
+      <div class="chat" style="display: none">
+        <h2 class="title">聊天室 | 当前有 0 人在线</h2>
+        <ul class="messages">
+        </ul>
+        <div class="send hover">
+          <input type="text" name="message" placeholder="输入文本消息" />
+          <input type="button" name="send" value="发送" placeholder="click me" />
+        </div>
+      </div>
+    </main>
+
+    <script type="module" src="./js/index.js"></script>
+  </body>
+</html>
