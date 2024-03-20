@@ -4,7 +4,7 @@ import Music from './music.js'
 const music = new Music()
 const controller = {
   play() {
-    music.setUrl('/src/assets/music.flac')
+    music.setUrl('/assets/music.mp3')
     music.play()
   },
   stop() {
