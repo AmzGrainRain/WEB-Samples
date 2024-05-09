@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(to bottom, #c6426e, #642b73);
+            perspective: 1800px;
+            transform-style: preserve-3d;
+        }
+
+        section {
+            padding: 3rem 2rem;
+            width: 570px;
+            border-radius: 1rem;
+            box-shadow: 0px 10px 20px 20px rgba(0, 0, 0, 0.17);
+            background-color: #fff;
+            overflow: hidden;
+
+            perspective: 1800px;
+            transform-origin: 50% 50%;
+            transform-style: preserve-3d;
+        }
+
+        section h3.title {
+            color: #eb285d;
+            font-size: 18px;
+
+            transform: translateZ(25px);
+        }
+
+        section h1.sub-title {
+            margin: 2rem 0;
+            color: #3e3e42;
+            font-size: 32px;
+            font-weight: 800;
+
+            transform: translateZ(35px);
+        }
+
+        section div.content {
+            position: relative;
+
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+            height: 100%;
+            border-radius: .5rem;
+
+            perspective: 1800px;
+            transform-origin: 50% 50%;
+            transform-style: preserve-3d;
+        }
+
+        section div.content div.card {
+            position: relative;
+            width: 175px;
+            height: 250px;
+            text-align: center;
+            border-radius: 15px;
+            box-shadow: 5px 5px 20px -5px rgba(0, 0, 0, 0.6);
+            overflow: hidden;
+
+            perspective: 1200px;
+            transform-style: preserve-3d;
+
+            transform: translatez(35px);
+            transition: transform 200ms ease-out;
+        }
+
+        section div.content div.card div.card-bg {
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            right: -50px;
+            bottom: -50px;
+
+            background: var(--url) center / cover no-repeat;
+
+            transform-origin: 50% 50%;
+            transform: translateZ(-50px);
+            z-index: 0;
+        }
+
+        section div.content div.card img.card-image {
+            position: relative;
+            height: 100%;
+            top: 25px;
+        }
+
+        section div.content div.card div.card-text {
+            position: absolute;
+            bottom: 0;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            width: 100%;
+            height: 70px;
+            color: #fff;
+            font-size: 18px;
+            font-weight: 700;
+
+            background: linear-gradient(to bottom,
+                    rgba(0, 0, 0, 0) 0%,
+                    rgba(0, 0, 0, 0.55) 100%);
+
+            z-index: 2;
+        }
+    </style>
+</head>
+
+<body>
+    <section>
+        <h3 class="title">Movies</h3>
+        <h1 class="sub-title">Popular</h1>
+        <div class="content">
+            <div class="card">
+                <div class="card-bg" style="--url: url('./images/1.jpg')"></div>
+                <img class="card-image" src="./images/3dr_chihiro.png" alt="image">
+                <div class="card-text">
+                    <p>Spirited Away</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-bg" style="--url: url('./images/1.jpg')"></div>
+                <img class="card-image" src="./images/3dr_chihiro.png" alt="image">
+                <div class="card-text">
+                    <p>Spirited Away</p>
+                </div>
+            </div>
+            <div class="card">
+                <div class="card-bg" style="--url: url('./images/1.jpg')"></div>
+                <img class="card-image" src="./images/3dr_chihiro.png" alt="image">
+                <div class="card-text">
+                    <p>Spirited Away</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        const content = document.querySelector('section')
+        const contentBg = document.querySelectorAll('div.card-bg')
+        const contentImage = document.querySelectorAll('img.card-image')
+
+        const range = 40
+        const cv = (posXY, windowWH) => parseFloat((posXY / windowWH * range - range / 2).toFixed(1))
+
+        let enableRotate = false
+        let enableBackgroundOffset = false
+        let enableImageOffset = false
+
+        let deltaX, deltaY
+        let flag = true, timer = null
+        document.addEventListener('mousemove', (e) => {
+            if (!flag) return
+
+            deltaX = cv(e.clientX, window.innerWidth)
+            deltaY = cv(e.clientY, window.innerHeight)
+
+            content.style.transform = `rotateX(${deltaY}deg) rotateY(${deltaX}deg)`
+
+            contentBg.forEach(el => {
+                el.style.backgroundPosition =
+                    `${deltaX * .45}px ${-deltaY * .45}px`
+            })
+
+            contentImage.forEach(el => {
+                el.style.transform =
+                    `translateX(${-deltaX}px) translateY(${deltaY}px)`
+            })
+
+            if (!timer) clearTimeout(timer)
+            timer = setTimeout(() => {
+                timer = true
+            }, 1000)
+        })
+    </script>
+</body>
+
+</html>

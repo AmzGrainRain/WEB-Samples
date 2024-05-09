@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        div {
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            background-color: pink;
+            animation:
+                xani 10s linear infinite,
+                yani 10s 1s linear infinite;
+        }
+
+        @keyframes transp {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                opacity: 1;
+            }
+        }
+
+        @keyframes xani {
+            0% {
+                left: 0;
+            }
+
+            50% {
+                left: calc(100% - 100px);
+            }
+
+            100% {
+                left: 0;
+            }
+        }
+
+        @keyframes yani {
+            0% {
+                top: 0;
+            }
+
+            50% {
+                top: calc(100% - 100px);
+            }
+
+            100% {
+                top: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div></div>
+
+    <h1>asdasdasd</h1>
+</body>
+
+</html>

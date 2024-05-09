@@ -1,0 +1,57 @@
+
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  transform: translateZ(30px) rotateX(var(--rt-x)) rotateY(var(--rt-y));
+}
+
+main h1,
+main p {
+  color: #000;
+  text-transform: uppercase;
+}
+
+main h1 {
+  font-size: 5rem;
+}
+
+main p {
+  margin-top: 1rem;
+  font-size: 1.2rem;
+}
+
+main ul {
+  margin-top: 3rem;
+  padding: 12px 64px;
+  list-style: none;
+  background-color: transparent;
+  backdrop-filter: blur(2rem);
+}
+
+main li {
+  float: left;
+  margin-right: 4ch;
+}
+
+main li:last-child {
+  margin-right: 0;
+}
+
+main a {
+  display: block;
+  height: 22px;
+  text-decoration: inherit;
+  letter-spacing: 2px;
+  color: #000;
+  border-bottom: 2px solid #000;
+  cursor: pointer;
+}
+
+main a:hover {
+  border-bottom: 4px solid #000;
+}
+
+/* 00ff99 */

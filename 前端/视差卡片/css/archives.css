@@ -1,0 +1,87 @@
+#goback {
+    position: absolute;
+    bottom: 2rem;
+    right: 2rem;
+    padding: 4px 8px 2px 8px;
+    font-weight: bolder;
+    font-size: larger;
+    cursor: pointer;
+    box-sizing: border-box;
+    border-bottom: 3px solid #000;
+    letter-spacing: 1px;
+    background-color: #fffa;
+    backdrop-filter: blur(1rem);
+}
+
+#goback:hover {
+    color: #fff;
+    background-color: #000;
+    border-bottom: 3px solid #fff;
+}
+
+main {
+    padding: 1rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: calc(100vw - 35rem);
+    height: 100vh;
+    background-color: #fff2;
+    backdrop-filter: blur(1rem);
+}
+
+main h1 {
+    padding-bottom: .5rem;
+    letter-spacing: .5ch;
+    border-bottom: 3px solid #000;
+}
+
+main ul {
+    margin-top: 1rem;
+    list-style: none;
+    height: calc(100% - 4rem);
+    overflow: auto;
+}
+
+main ul::-webkit-scrollbar {
+    width: 3px;
+    background-color: #fff8;
+}
+
+main ul::-webkit-scrollbar-thumb {
+    background-color: #000;
+}
+
+main a {
+    display: flex;
+    margin-bottom: 1rem;
+    cursor: pointer;
+}
+
+main img {
+    width: 12em;
+    height: 8rem;
+    object-fit: cover;
+    background-color: pink;
+}
+
+main div {
+    padding-left: 1rem;
+    width: 100%;
+    overflow: hidden;
+}
+
+main h2 {
+    letter-spacing: 1px;
+}
+
+main p {
+    width: 100%;
+    height: calc(100% - 29px);
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    word-break: break-word;
+}

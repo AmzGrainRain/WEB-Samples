@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+        }
+
+        main {
+            width: 100%;
+            height: fit-content;
+            overflow-y: auto;
+        }
+
+        .list-item {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            height: 45vh;
+            overflow: hidden;
+        }
+
+        .list-item::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: var(--bg) center / cover no-repeat fixed;
+            filter: brightness(.8);
+            z-index: -1;
+            transition: all .3s;
+        }
+
+        .list-item:hover::before {
+            filter: brightness(.9);
+        }
+
+        .item-text {
+            color: #fff;
+            font-family: "Courier New", Courier, monospace;
+            text-align: center;
+            text-shadow: 1px 1px 2px #000;
+
+            & .text-title {
+                font-size: 2rem;
+                font-weight: bolder;
+                margin-bottom: 20px;
+            }
+
+            & .text-desc {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main class="main">
+        <section class="list-item" style="--bg: url('./images/1.jpg')">
+            <div class="item-text">
+                <div class="text-title">「四月是你的谎言」</div>
+                <div class="text-desc">
+                    我在盛开的樱花下遇见你，从此命运不再属于自己。
+                </div>
+            </div>
+        </section>
+        <section class="list-item" style="--bg: url('./images/2.jpg')">
+            <div class="item-text">
+                <div class="text-title">「言叶之庭」</div>
+                <div class="text-desc">
+                    每晚临睡前 每天睁开眼的瞬间 不知不觉 我都在祈盼雨天 祈盼雨天
+                    祈盼和那个人 再次相会
+                </div>
+            </div>
+        </section>
+        <section class="list-item" style="--bg: url('./images/3.jpg')">
+            <div class="item-text">
+                <div class="text-title">「你的名字」</div>
+                <div class="text-desc">
+                    黄昏，不是白昼亦不是夜晚，是我努力却看不清你的脸。
+                </div>
+            </div>
+        </section>
+        <section class="list-item" style="--bg: url('./images/4.jpg')">
+            <div class="item-text">
+                <div class="text-title">「天气之子」</div>
+                <div class="text-desc">
+                    天气真的是很不可思议，光只是天空的模样就让人感动不已。
+                </div>
+            </div>
+        </section>
+        <section class="list-item" style="--bg: url('./images/5.jpg')">
+            <div class="item-text">
+                <div class="text-title">「K-ON！」</div>
+                <div class="text-desc">
+                    重要的，珍惜的，一直在身边，一旦成为理所当然，就难以发现
+                </div>
+            </div>
+        </section>
+        <section class="list-item" style="--bg: url('./images/6.jpg')">
+            <div class="item-text">
+                <div class="text-title">「CLANNAD」</div>
+                <div class="text-desc">
+                    我也很没用，但是两个人一起的话，就会变得很坚强。
+                </div>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>
