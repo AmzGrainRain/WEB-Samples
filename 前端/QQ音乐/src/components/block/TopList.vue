@@ -26,7 +26,7 @@ const pos = ['0 0', '0 0', '-224px 0', '-448px 0', '-672px 0', '-896px 0']
         <!-- List -->
         <ol>
           <li v-for="(item, j) in group.list" :key="j">
-            <span>{{ j }}</span>
+            <span>{{ j + 1 }}</span>
             <a href="#">
               <span>{{ item.name }}</span>
               <span>{{ item.author }}</span>
