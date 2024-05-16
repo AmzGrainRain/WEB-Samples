@@ -1,0 +1,87 @@
+:root {
+  font-family: poppin, Tahoma, Arial, \5FAE\8F6F\96C5\9ED1, sans-serif;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-width: 1280px;
+}
+
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+ul {
+  list-style: none;
+}
+
+div.box {
+  background-color: #fafafa;
+
+  & h2.title {
+    padding: 50px 0 24px 0;
+    text-align: center;
+    font-size: 30px;
+    font-weight: normal;
+    letter-spacing: 6px;
+  }
+
+  & > ul.nav {
+    margin: 0 auto;
+    list-style: none;
+    width: fit-content;
+    font-size: 15px;
+    overflow: hidden;
+
+    & li {
+      margin: 0 24px;
+      float: left;
+    }
+
+    & li.active {
+      color: #31c27c;
+    }
+  }
+}
+
+.hover-image {
+  position: relative;
+  overflow: hidden;
+}
+
+.hover-image img {
+  transition: 0.3s;
+}
+
+.hover-image:hover img {
+  filter: brightness(0.6);
+  transform: scale(1.1);
+}
+
+.hover-image::after {
+  content: '';
+  margin: auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: var(--hover-icon-size);
+  height: var(--hover-icon-size);
+  background-image: url('../images/carousel/recommand/play.png');
+  background-size: cover;
+  opacity: 0;
+  transition: 0.5s;
+  z-index: 5;
+}
+
+.hover-image:hover::after {
+  opacity: 1;
+  transform: scale(1.5);
+}
