@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import Float from './components/Float.vue'
 import MainNav from './components/MainNav.vue'
 import SubNav from './components/SubNav.vue'
 import PageFooter from './components/block/Footer.vue'
@@ -12,6 +13,8 @@ import MV from './components/block/MV.vue'
 </script>
 
 <template>
+  <Float />
+
   <MainNav />
   <SubNav />
 

@@ -24,47 +24,60 @@ i.icons {
   width: var(--w);
   height: var(--h);
   background-image: url('/icons.png');
+  background-position: var(--pos)
 }
 
 .triangle-black {
   --w: 8px;
   --h: 8px;
-  background-position: -40px -319px;
+  --pos: -40px -319px;
 }
 
 .triangle-green {
   --w: 8px;
   --h: 8px;
-  background-position: -40px -328px;
+  --pos: -40px -328px;
 }
 
 .left-arrow-carousel {
   --w: 20px;
   --h: 37px;
-  background-position: -20px -121px;
+  --pos: -20px -121px;
 }
 
 .right-arrow-carousel {
   --w: 20px;
   --h: 37px;
-  background-position: 0 -121px;
+  --pos: 0 -121px;
 }
 
 .right-arrow {
   --w: 7px;
   --h: 12px;
-  background-position: -120px -40px;
+  --pos: -120px -40px;
+}
+
+.top-arrow {
+  --w: 18px;
+  --h: 10px;
+  --pos: -160px 0;
 }
 
 .play {
   --w: 13px;
   --h: 16px;
-  background-position: -60px -220px;
+  --pos: -60px -220px;
+}
+
+.camera {
+  --w: 19px;
+  --h: 12px;
+  --pos: -180px -20px;
 }
 
 .video {
-  --w: 19px;
-  --h: 12px;
-  background-position: -180px -20px;
+  --w: 20px;
+  --h: 17px;
+  --pos: -180px 0;
 }
 </style>

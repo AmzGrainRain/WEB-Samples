@@ -41,30 +41,30 @@ import { OpenPlatformListData } from '../../data/footer/open_platform'
 
       <!-- 产品 -->
       <div class="product">
-        <h3>下载QQ音乐客户端</h3>
+        <h3>特色产品</h3>
         <ul>
           <li style="--hover-pos: -370px -49px">
             <a href="#">
               <FooterIcon name="qmkg" />
-              <span>PC版</span>
+              <span>全民K歌</span>
             </a>
           </li>
           <li style="--hover-pos: -463px -49px">
             <a href="#">
               <FooterIcon name="ss" />
-              <span>MAC版</span>
+              <span>银河音效</span>
             </a>
           </li>
           <li style="--hover-pos: -563px -49px">
             <a href="#">
               <FooterIcon name="qplay" />
-              <span>Android版</span>
+              <span>QPlay</span>
             </a>
           </li>
           <li style="--hover-pos: -650px -49px">
             <a href="#">
               <FooterIcon name="fun" />
-              <span>iPhone版</span>
+              <span>Fan直播伴侣</span>
             </a>
           </li>
         </ul>

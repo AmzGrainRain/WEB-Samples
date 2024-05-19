@@ -48,7 +48,7 @@ import { CarouselData } from '../../data/mv/carousel.ts'
             :description="item.author"
             :href="item.href"
           >
-            <span style="font-size: 14px; color: #999"><Icon name="video" /> {{ item.play }}</span>
+            <span style="font-size: 14px; color: #999"><Icon name="camera" /> {{ item.play }}</span>
           </PortraitCard>
         </div>
       </Carousel>
