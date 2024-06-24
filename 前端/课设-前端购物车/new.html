@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>新品</title>
+    <link rel="stylesheet" href="./css/nav.css">
+    <link rel="stylesheet" href="./css/carousel.css">
+    <link rel="stylesheet" href="./css/index.css">
+    <script src="./js/auth.js"></script>
+    <script>
+        if (isLogin() === "") {
+            alert("您还没有登录");
+            location.href = "/login.html";
+        }
+    </script>
+</head>
+
+<body>
+    <!-- 导航栏 -->
+    <nav>
+        <!-- 左侧 logo -->
+        <img src="./logo.png" alt="logo">
+
+        <!-- 右侧按钮 -->
+        <div class="menu">
+            <div>
+                <a href="/index.html">推荐</a>
+            </div>
+            <div>
+                <a class="active" class="sub" href="#">品类</a>
+                <div>
+                    <a href="/list.html">全部</a>
+                    <a href="/hot.html">热门</a>
+                    <a class="active" href="/new.html">新品</a>
+                </div>
+            </div>
+
+            <div>
+                <a href="/cart.html">购物车</a>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <div style="height: 18px;"></div>
+
+        <section>
+            <h2 class="title">新品</h2>
+            <div class="goods-list">
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div>版权所有</div>
+    </footer>
+
+    <script src="./js/jquery-3.7.1.min.js"></script>
+    <script src="./js/cart.js"></script>
+    <script>
+        (async function () {
+            var goodsList = $("main section .goods-list");
+            goodsList.innerHTML = "";
+
+            var req = await fetch('./data/new.json');
+            var goods = await req.json();
+            goods.forEach(e => {
+                const clickHandle = `addGoodsToCart('${e.id}', '${e.image}', '${e.title}', '${e.desc}', '${e.price}')`
+                var htmlCode = getItemHtmlCode(e, "添加到购物车", clickHandle);
+                goodsList.append(htmlCode);
+            })
+        })();
+    </script>
+</body>
+
+</html>

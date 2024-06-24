@@ -1,0 +1,89 @@
+main section {
+    margin: 0 auto;
+    width: 1200px;
+    min-height: 100vh;
+}
+
+main section > .title {
+    padding-left: 10px;
+    height: 40px;
+    line-height: 40px;
+    border: 1px solid #0002;
+    border-left: 6px solid #000;
+}
+
+main section .goods-list {
+    margin-top: 10px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+main section .goods-list .item {
+    padding: 8px;
+    display: block;
+    width: 25%;
+    border-radius: 4px;
+}
+
+main section .goods-list .item:hover {
+    box-shadow: 0 0 3px #000;
+}
+
+main section .goods-list .item .item-image {
+    width: 100%;
+    height: 260px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+main section .goods-list .item .item-title {
+    height: 30px;
+    line-height: 30px;
+    text-overflow: ellipsis;
+    text-wrap: nowrap;
+    overflow: hidden;
+}
+
+main section .goods-list .item .item-desc {
+    height: 22px;
+    line-height: 22px;
+    text-overflow: ellipsis;
+    text-wrap: nowrap;
+    overflow: hidden;
+}
+
+main section .goods-list .item div {
+    margin-top: 5px;
+    display: flex;
+    justify-content: space-between;
+}
+
+main section .goods-list .item div span {
+    padding: 2px 8px;
+    display: block;
+    font-size: 18px;
+    color: #fff;
+    border-radius: 5px;
+    background-color: #f60;
+}
+
+main section .goods-list .item div input {
+    padding: 2px 8px;
+    border: 1px solid #0004;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+footer {
+    margin-top: 40px;
+    width: 100%;
+    background-color: #333;
+}
+
+footer div {
+    margin: 0 auto;
+    width: 1200px;
+    height: 50px;
+    line-height: 50px;
+    color: #fff;
+}

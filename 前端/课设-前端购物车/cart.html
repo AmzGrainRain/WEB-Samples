@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>商品列表</title>
+    <link rel="stylesheet" href="./css/nav.css">
+    <link rel="stylesheet" href="./css/carousel.css">
+    <link rel="stylesheet" href="./css/cart.css">
+    <script src="./js/auth.js"></script>
+    <script>
+        if (isLogin() === "") {
+            alert("您还没有登录");
+            location.href = "/login.html";
+        }
+    </script>
+</head>
+
+<body>
+    <!-- 导航栏 -->
+    <nav>
+        <!-- 左侧 logo -->
+        <img src="./logo.png" alt="logo">
+
+        <!-- 右侧按钮 -->
+        <div class="menu">
+            <div>
+                <a href="/index.html">推荐</a>
+            </div>
+            <div>
+                <a class="sub" href="#">品类</a>
+                <div>
+                    <a href="/list.html">全部</a>
+                    <a href="/hot.html">热门</a>
+                    <a href="/new.html">新品</a>
+                </div>
+            </div>
+
+            <div>
+                <a class="active" href="/cart.html">购物车</a>
+            </div>
+        </div>
+    </nav>
+
+    <div style="height: 30px;"></div>
+
+    <main>
+        <section>
+            <h1 class="title">购物车</h1>
+            <div class="goods-list">
+
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div>版权所有</div>
+    </footer>
+
+    <script src="./js/jquery-3.7.1.min.js"></script>
+    <script src="./js/cart.js"></script>
+    <script>
+        (async function () {
+            var goodsList = $("main section .goods-list");
+            goodsList.innerHTML = "";
+
+            var goods = getCart();
+            goods.forEach(e => {
+                const clickHandle = `removeGoodsFromCart('${e.id}')`
+                var htmlCode = getItemHtmlCode(e, "从购物车移除", clickHandle);
+                goodsList.append(htmlCode);
+            })
+        })();
+    </script>
+</body>
+
+</html>

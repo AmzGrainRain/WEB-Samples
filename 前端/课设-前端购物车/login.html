@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        a {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 18px;
+            color: #fff;
+            text-decoration: inherit;
+            padding: 4px 8px;
+            background-color: #000;
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            font-weight: normal;
+            letter-spacing: 1ch;
+        }
+
+        input {
+            margin-bottom: 20px;
+            padding: 0 8px;
+            display: block;
+            width: 280px;
+            height: 36px;
+            text-align: center;
+            outline: none;
+            border-radius: 8px;
+            border: 1px solid #0005;
+        }
+
+        input[type=button] {
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <a href="/regist.html">注册账号</a>
+    <main>
+        <h1>登录</h1>
+        <input type="text" name="账号" placeholder="账号">
+        <input type="password" name="密码" placeholder="密码">
+        <input type="button" value="登录" onclick="auth()">
+    </main>
+
+    <script src="./js/auth.js"></script>
+    <script>
+        var user = document.querySelector('input[type=text]');
+        var pass = document.querySelector('input[type=password]');
+
+        function auth() {
+            if (user.value.length === 0) {
+                alert("请输入用户名");
+                return;
+            }
+
+            if (pass.value.length === 0) {
+                alert("请输入密码");
+                return;
+            }
+
+            var result = login(user.value, pass.value);
+            switch (result) {
+                case -1:
+                    alert("用户不存在");
+                    break;
+                case 1:
+                    alert("账号或密码错误");
+                    break;
+                case 0:
+                    alert("登录成功");
+                    sessionStorage.setItem("loggedIn", user.value);
+                    sessionStorage.removeItem("cart");
+                    window.location.href = "/index.html";
+                    break;
+            }
+        }
+    </script>
+</body>
+
+</html>
