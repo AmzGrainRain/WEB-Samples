@@ -3,184 +3,149 @@ const formidable = require('formidable')
 const path = require('path')
 const fse = require('fs-extra')
 const sharp = require('sharp')
-
 const app = express.Router()
 
-app.post('/get-all', (req, res) => {
-  // 验证表单数据完整性
-  if (!String(req.body.page).length) return res.status(400).end()
+const findImageById = (id) => {
+  for (let i = 0; i < data.length; ++i) {
+    if (data[i].id === id) return i
+  }
+  return -1
+}
 
-  // 读取图片索引信息
-  fse.readJSON(path.join(global.staticPath, '../images.json')).then((jsonData) => {
-    jsonData = jsonData.sort((a, b) => a - b)
-    const skip = 30
-    const result = []
-
-    // 若没有越界
-    if (req.body.page * skip < jsonData.length) {
-      // 截取内容
-      for (let i = req.body.page * skip; i < req.body.page * skip + skip; i++) {
-        if (jsonData?.[i]) result.push(jsonData[i])
-      }
-    }
-
-    // 返回数据
-    res.json(result)
-  }).catch((err) => {
-    console.log(err)
-    res.status(500).end()
+app.get('/carousel', (req, res)  => {
+  // const list = []
+  // for (let i = 0; i < 6; ++i) {
+  //   const image = data[Math.floor(Math.random() * data.length)];
+  //   if (list.findIndex((e) => e.id == image.id))
+  // }
+  res.json({
+    ts: Date.now(),
+    total: data.length
   })
 })
 
-app.post('/get-fav', (req, res) => {
-  // 验证表单数据完整性
-  if (!String(req.body.page).length) return res.status(400).end()
-
-  // 读取图片索引信息
-  fse.readJSON(path.join(global.staticPath, '../images.json')).then((jsonData) => {
-    const tmp = []
-    jsonData.forEach((item) => {
-      if (item.like) tmp.push(item)
-    })
-    jsonData = tmp.sort((a, b) => a - b)
-    const skip = 30
-    const result = []
-
-    // 若没有越界
-    if (req.body.page * skip < jsonData.length) {
-      // 截取内容
-      for (let i = req.body.page * skip; i < req.body.page * skip + skip; i++) {
-        if (jsonData?.[i]) result.push(jsonData[i])
-      }
-    }
-
-    // 返回数据
-    res.json(result)
-  }).catch((err) => {
-    console.log(err)
-    res.status(500).end()
-  })
-})
-
-app.post('/mark', (req, res) => {
-  // if (!req.session.auth) return res.status(403).end()
-  if (!String(req.body.name).length) return res.status(400).end()
-  if (!String(req.body.mark).length) return res.status(400).end()
-  const jsonFile = path.join(__dirname, '../images.json')
-
-  fse.readJSON(jsonFile).then((jsonData) => {
-    for (let i = 0; i < jsonData.length; i++) {
-      if (jsonData[i].name !== req.body.name) continue
-
-      jsonData[i].like = req.body.mark === 'like' ? true : false
-      break
-    }
-    fse.writeJSON(jsonFile, jsonData).catch((rea) => new Error(rea))
-    res.status(204).end()
-  }).catch((err) => {
-    console.log(err)
-    res.status(500).end()
-  })
-})
-
-app.post('/delete', (req, res) => {
-  // if (!req.session.auth) return res.status(403).end()
-  if (!String(req.body.name).length) return res.status(400).end()
-  if (!String(req.body.mark).length) return res.status(400).end()
-  const jsonFile = path.join(__dirname, '../images.json')
-
+app.get('/list/page/:page/', (req, res) => {
   try {
-    fse.unlinkSync(path.join(global.staticPath, `./img/overview/${req.body.name}`))
-    fse.unlinkSync(path.join(global.staticPath, `./img/origin/${req.body.name}`))
-    fse.readJSON(jsonFile).then((jsonData) => {
-      for (let i = 0; i < jsonData.length; i++) {
-        if (jsonData[i].name !== req.body.name) continue
-  
-        jsonData.splice(i, 1)
-        break
-      }
-      fse.writeJSON(jsonFile, jsonData).catch((rea) => new Error(rea))
-      res.status(204).end()
-    }).catch((err) => {
-      console.log(err)
-      res.status(500).end()
+    const begin = parseInt(req.params.page) * 30
+    let end = begin + 31
+    if (end > data.length) end = data.length
+    res.json({
+      ts: Date.now(),
+      list: data.slice(begin, end),
+      total: data.length
     })
+  }
+  catch (err) {
+    console.log(err)
+    res.status(500).end()
+  }
+})
+
+app.get('/list/group/:group/page/:page', (req, res) => {
+  try {
+    const list = data.filter((item) => item.group.findIndex((name) => name == req.params.group) !== -1)
+    res.json({
+      ts: Date.now(),
+      list,
+      total: list.length
+    })
+  }
+  catch (err) {
+    console.log(err)
+    res.status(500).end()
+  }
+})
+
+app.get('/list/mark/id/:id/group/:group', (req, res) => {
+  data.forEach(item => {
+    if (item.id === req.params.id) {
+      item.group.push(req.params.group)
+    }
+  })
+  fse.writeJSONSync(dataFilePath, data)
+  res.status(204).end()
+})
+
+app.get('/list/unmark/id/:id/group/:group', (req, res) => {
+  for (let i = 0; i < data.length; ++i) {
+    if (data[i].id !== req.params.id) continue
+
+    let targetIndex = data[i].group.findIndex((name) => name === req.params.group)
+    const newGroup = []
+    for (let j = 0; j < data[i].group.length; ++j) {
+      if (j == targetIndex) continue
+      newGroup.push(data[i].group[j])
+    }
+    data[i].group = newGroup
+    break
+  }
+  fse.writeJSONSync(dataFilePath, data)
+  res.status(204).end()
+})
+
+app.get('/list/delete/:id', (req, res) => {
+  try {
+    if (!req.params?.id) return res.status(400).end()
+
+    const i = findImageById(req.params.id);
+    if (i !== -1) {
+      fse.unlinkSync(path.join(global.staticPath, `./img/overview/${data[i].id}.jpg`))
+      fse.unlinkSync(path.join(global.staticPath, `./img/origin/${data[i].id}.jpg`))
+      data.splice(i, 1)
+    }
+
+    res.status(204).end()
   } catch (rea) {
     console.log(rea)
-    return res.status(500).end()
+    res.status(500).end()
   }
 })
 
 app.post('/upload', (req, res) => {
-  // if (!req.session.auth) return res.status(403).end()
-
-  fse.emptyDirSync(path.join(global.staticPath, './img/upload/origin'))
+  fse.emptyDirSync(path.join(global.staticPath, './img/upload'))
   const form = formidable({
-    uploadDir: path.join(global.staticPath, './img/upload/origin'),
+    uploadDir: path.join(global.staticPath, './img/upload'),
     allowEmptyFiles: false,
     keepExtensions: true,
     maxFileSize: 1024 * 1204 * 1024
   })
-  const jsonFile = path.join(__dirname, '../images.json')
 
-  form.parse(req, (err, fields, files) => {
+  form.parse(req, async (err, fields, files) => {
     if (err) {
       console.log(err)
       return res.status(500).end()
     }
 
-    // 仅当有图片上传时才触发
-    if (Object.keys(files).length) {
-      // 获取接收到的文件名，将其存放至一个数组
-      const _files = []
-      for (let i = 0; i < Object.keys(files).length; i++) {
-        _files.push(files[i].newFilename)
-      }
-      // 读取 images.json
-      const jsonData = fse.readJSONSync(jsonFile)
+    try {
+      const uploaded = []
+      const length = Object.keys(files).length;
+      for (let i = 0; i < length; ++i) {
+        const tmpFilePath = files[i].filepath
+        const fileName = files[i].newFilename
+        const fileType = fileName.slice(fileName.lastIndexOf('.'))
+        const id = fileName.slice(0, fileName.lastIndexOf('.'))
 
-      try {
-        // 遍历文件名数组
-        _files.forEach((e) => {
-          // 处于缓存目录中的文件
-          const tmpFile = path.join(global.staticPath, `./img/upload/origin/${e}`)
-          // 转储原图（文件）
-          fse.moveSync(tmpFile, path.join(global.staticPath, `./img/origin/${e}`))
-          // 压缩图片并转储缩略图
-          sharp(path.join(global.staticPath, `./img/origin/${e}`))
-            .jpeg({
-              quality: 50,
-            })
-            .toFile(path.join(global.staticPath, `./img/overview/${e}`))
-            .catch((rea) => new Error(rea))
-          // 将修改写入 images.json
-          jsonData.push({
-            name: e,
-            like: false
-          })
-          fse.writeJSONSync(jsonFile, jsonData)
-        })
-        // 完成操作后返回给客户端新增的图片
-        res.json(_files)
-      } catch (err) {
-        console.log(err)
-        // 遍历文件名列表
-        _files.forEach((e) => {
-          // 撤销修改
-          fse.removeSync(path.join(global.staticPath, `./img/origin/${e}`))
-          fse.removeSync(path.join(global.staticPath, `./img/overview/${e}`))
-          for (let i = 0; i < jsonData.length; i++) {
-            if (jsonData[i].name !== e) continue
-            
-            jsonData.splice(i, 1)
-            break
-          }
-        })
-        // 保存 images.json
-        fse.writeJSONSync(jsonFile, jsonData)
-        res.status(500).end()
+        await (sharp(tmpFilePath)
+          .jpeg({ quality: 30, progressive: true })
+          .resize(800)
+          .toFile(path.join(global.staticPath, `img/overview/${id}.jpg`)))
+          .catch((rea) => new Error(rea))
+
+        await (sharp(tmpFilePath)
+          .jpeg({ quality: 95 })
+          .toFile(path.join(global.staticPath, `img/origin/${id}.jpg`)))
+          .catch((rea) => new Error(rea))
+
+        // fse.moveSync(tmpFilePath, path.join(global.staticPath, `img/origin/${fileName}`))
+        data.push({ id, type: '.jpg', group: [] })
+        uploaded.push(fileName)
       }
-    } else res.json({})
+      fse.writeJSONSync(dataFilePath, data)
+      res.json(uploaded)
+    } catch (err) {
+      console.log(err)
+      res.status(500).end()
+    }
   })
 })
 

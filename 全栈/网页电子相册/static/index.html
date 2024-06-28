@@ -1,75 +1,76 @@
 <!DOCTYPE html>
 <html lang="zh">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>图库</title>
-    <meta name="keywords" content="关键词" />
-    <meta name="description" content="描述" />
-    <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" />
-    <!-- 样式 -->
-    <link id="theme" rel="stylesheet" href="./css/theme/light.css" />
-    <link rel="stylesheet" href="./css/all.css" />
-    <link rel="stylesheet" href="./css/nav.css" />
-    <link rel="stylesheet" href="./css/main.css" />
-    <link rel="stylesheet" href="./css/theme.css">
-    <!-- 库 -->
-    <link rel="stylesheet" href="./assets/fonts/boxicons-2.1.2/css/boxicons.min.css" />
-  </head>
-  <body>
-    <!-- 主题切换 -->
-    <div class="theme" onclick="themeSwitcher()">
-      <i class='dark bx bxs-moon' style="display: none;"></i>
-      <i class='light bx bxs-sun' style="display: none;"></i>
-    </div>
 
-    <!-- 导航栏 -->
-    <nav>
-      <ul class="left">
-        <li class="home active">
-          <span>
-            <i class='bx bxs-home' style="color:#e55"></i>
-            <a href="./index.html" rel="noopener noreferrer">首页</a>
-          </span>
-        </li>
-        <li class="favorite" onclick="Mode.value = 'favorite'">
-          <span>
-            <i class='bx bxs-heart' style="color:#e55"></i>
-            <a href="javascript:void(0)" rel="noopener noreferrer">收藏</a>
-          </span>
-        </li>
-        <li class="upload" onclick="uploadImage()">
-          <span>
-            <i class='bx bxs-cloud-upload' style="color:#e55"></i>
-            <a href="javascript:void(0)" rel="noopener noreferrer">上传</a>
-          </span>
-        </li>
-      </ul>
-      <ul class="right">
-        <li class="prev" onclick="Page.value--">
-          <span>
-            <i class="bx bxs-chevron-left"></i>
-          </span>
-        </li>
-        <li class="page">第 1 页</li>
-        <li class="next" onclick="Page.value++">
-          <span>
-            <i class="bx bxs-chevron-right"></i>
-          </span>
-        </li>
-      </ul>
-    </nav>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>图库</title>
+  <meta name="keywords" content="关键词" />
+  <meta name="description" content="描述" />
+  <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" />
+  <!-- 样式 -->
+  <link id="theme" rel="stylesheet" data-mode="light" href="./css/theme/light.css" />
+  <link rel="stylesheet" href="./css/all.css" />
+  <link rel="stylesheet" href="./css/nav.css" />
+  <link rel="stylesheet" href="./css/main.css" />
+  <link rel="stylesheet" href="./css/theme.css">
+  <!-- 库 -->
+  <link rel="stylesheet" href="./assets/fonts/boxicons-2.1.2/css/boxicons.min.css" />
+</head>
 
-    <!-- 内容 -->
-    <main>
-      <p>正在拼命获取图片...</p>
-    </main>
+<body>
+  <!-- 主题切换 -->
+  <div id="switch-theme">
+    <i class='dark bx bxs-moon' style="display: none;"></i>
+    <i class='light bx bxs-sun' style="display: none;"></i>
+  </div>
 
-    <!-- 上传控件 -->
-    <input style="display: none;" type="file" accept="image/*" multiple="multiple" name="upload">
+  <!-- 导航栏 -->
+  <nav>
+    <ul class="left">
+      <li class="home active" onclick="ShowAll()">
+        <span>
+          <i class='bx bxs-home' style="color:#e55"></i>
+          <a href="./index.html" rel="noopener noreferrer">首页</a>
+        </span>
+      </li>
+      <li class="favorite" onclick="ShowFavorite()">
+        <span>
+          <i class='bx bxs-heart' style="color:#e55"></i>
+          <a href="javascript:void(0)" rel="noopener noreferrer">收藏</a>
+        </span>
+      </li>
+      <li class="upload" id="upload-image" onclick="UploadImage()">
+        <span>
+          <i class='bx bxs-cloud-upload' style="color:#e55"></i>
+          <a href="javascript:void(0)" rel="noopener noreferrer">上传</a>
+        </span>
+      </li>
+    </ul>
+    <ul class="right">
+      <li class="prev" onclick="PrevPage()">
+        <span>
+          <i class="bx bxs-chevron-left"></i>
+        </span>
+      </li>
+      <li class="page">第 1 页</li>
+      <li class="next" onclick="NextPage()">
+        <span>
+          <i class="bx bxs-chevron-right"></i>
+        </span>
+      </li>
+    </ul>
+  </nav>
 
-    <!-- Java Script (ES2021) -->
-    <script type="module" src="./js/index.js"></script>
-  </body>
+  <!-- 内容 -->
+  <main>
+    <p>正在拼命获取图片...</p>
+  </main>
+
+  <input id="uploader" style="display: none;" type="file" accept="image/*" multiple>
+  <script type="module" src="./js/theme-switcher.js"></script>
+  <script type="module" src="./js/index.js"></script>
+</body>
+
 </html>

@@ -13,7 +13,7 @@ const reactive = (val, callback) => {
 
   return new Proxy(reactiveData, {
     get: (target, key) => target[key],
-    set: (target, key, newValue) => {
+    set: async (target, key, newValue) => {
       callback(target, key, newValue)
       return true
     }

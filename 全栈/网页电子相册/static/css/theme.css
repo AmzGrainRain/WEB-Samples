@@ -1,4 +1,4 @@
-div.theme {
+div#switch-theme {
   position: fixed;
   right: 1rem;
   bottom: 1rem;
@@ -16,10 +16,10 @@ div.theme {
   cursor: pointer;
 }
 
-div.theme i {
+div#switch-theme i {
   pointer-events: none;
 }
 
-div.theme:hover {
+div#switch-theme:hover {
   background-color: var(--page-bg-opactiy);
 }

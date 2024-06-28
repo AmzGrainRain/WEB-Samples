@@ -1,11 +1,9 @@
-const reqImages = (_page = 0, mode = 'all') => {
+const requestImageList = (page = 0) => {
   return new Promise((resolve, reject) => {
-    fetch(mode === 'all' ? '/api/img/get-all' : '/api/img/get-fav', {
-      method: 'POST',
+    fetch(`/api/images/list/page/${page}`, {
+      method: 'GET',
       mode: 'cors',
-      redirect: 'follow',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ page: _page })
+      redirect: 'follow'
     })
       .then((ori) => ori.json())
       .then((data) => resolve(data))
@@ -13,69 +11,75 @@ const reqImages = (_page = 0, mode = 'all') => {
   })
 }
 
-const reqMarkImages = (name, mark) => {
+const requestFavoriteImageList = (page = 0) => {
   return new Promise((resolve, reject) => {
-    fetch('/api/img/mark', {
-      method: 'POST',
+    fetch(`/api/images/list/group/favorite/page/${page}`, {
+      method: 'GET',
       mode: 'cors',
-      redirect: 'follow',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name, mark })
+      redirect: 'follow'
     })
-      .then((res) => res.status === 200 || 204 ? resolve(res): reject(res))
+      .then((ori) => ori.json())
+      .then((data) => resolve(data))
       .catch((rea) => reject(rea))
   })
 }
 
-const reqDeleteImages = (name) => {
+const requestMarkImage = (id, group) => {
   return new Promise((resolve, reject) => {
-    fetch('/api/img/delete', {
-      method: 'POST',
+    fetch(`/api/images/list/mark/id/${id}/group/${group}`, {
+      method: 'GET',
       mode: 'cors',
-      redirect: 'follow',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name })
+      redirect: 'follow'
     })
-      .then((res) => res.status === 200 || 204 ? resolve(res): reject(res))
+      .then((res) => res.status === 200 || 204 ? resolve() : reject())
       .catch((rea) => reject(rea))
   })
 }
 
-const reqUploadImages = (files) => {
+const requestUnMarkImage = (id, group) => {
+  return new Promise((resolve, reject) => {
+    fetch(`/api/images/list/unmark/id/${id}/group/${group}`, {
+      method: 'GET',
+      mode: 'cors',
+      redirect: 'follow'
+    })
+      .then((res) => res.status === 200 || 204 ? resolve() : reject())
+      .catch((rea) => reject(rea))
+  })
+}
+
+const requestDeleteImage = (id) => {
+  return new Promise((resolve, reject) => {
+    fetch(`/api/images/list/delete/${id}`, {
+      method: 'GET',
+      mode: 'cors',
+      redirect: 'follow'
+    })
+      .then((res) => res.status === 200 || 204 ? resolve() : reject())
+      .catch((rea) => reject(rea))
+  })
+}
+
+const requestUploadImages = (files) => {
   const formData = new FormData()
-  for (let i = 0; i < files.length; i++) {
-    formData.append(i, files[i])
-  }
+  Array.prototype.forEach.call(files, (file, i) => formData.append(i, file))
   return new Promise((resolve, reject) => {
-    fetch('/api/img/upload', {
+    fetch('/api/images/upload', {
       method: 'POST',
       mode: 'cors',
       redirect: 'follow',
       body: formData
     })
-      .then((res) => res.status === 200 ? resolve(res): reject(res))
+      .then((res) => res.status === 200 ? resolve(res) : reject(res))
       .catch((rea) => reject(rea))
   })
 }
 
-// const reqLogin = (email, password) => {
-//   return new Promise((resolve, reject) => {
-//     fetch('/api/auth', {
-//       method: 'POST',
-//       mode: 'cors',
-//       redirect: 'follow',
-//       headers: { 'Content-Type': 'application/json' },
-//       body: JSON.stringify({ email, password })
-//     })
-//       .then((res) => res.status === 204 ? resolve(res): reject(res))
-//       .catch((rea) => reject(rea))
-//   })
-// }
-
 export {
-  reqImages,
-  reqMarkImages,
-  reqDeleteImages,
-  reqUploadImages
-  // reqLogin
+  requestImageList,
+  requestFavoriteImageList,
+  requestMarkImage,
+  requestUnMarkImage,
+  requestDeleteImage,
+  requestUploadImages
 }

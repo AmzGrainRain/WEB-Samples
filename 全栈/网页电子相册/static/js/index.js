@@ -1,58 +1,96 @@
-import './onload.js'
-import './utils/ClickEvents.js'
+import els from './Elements.js'
+import { PageManager } from './PageManager.js'
+import {
+  requestDeleteImage,
+  requestMarkImage,
+  requestUnMarkImage,
+  requestUploadImages
+} from './lib/Request.js'
 
-import reactive from './lib/Reactive.js'
-import { reqImages } from './lib/Request.js'
+const pageManager = new PageManager()
+pageManager.update()
 
-import MainContentTemplate from './utils/MainContentTemplate.js'
+window.ShowFavorite = () => {
+  pageManager.switchGroup('all')
+}
 
+window.ShowFavorite = () => {
+  pageManager.switchGroup('favorite')
+}
 
-/**
- * 模式数据
- */
-window.Mode = reactive('all', (target, key, newValue) => {
-  // 请求数据
-  reqImages(window.Page.value, newValue).then((res) => {
-    if (res.length !== 0) {
-      // 应用修改
-      target[key] = newValue
-      // 更新页码显示
-      El.pageNumber.innerHTML = `第 ${Page.value + 1} 页`
-      // 更新导航栏
-      El.navHome.classList.remove('active')
-      El.navFavorite.classList.remove('active')
-      if (newValue === 'all') El.navHome.classList.add('active')
-      else El.navFavorite.classList.add('active')
-      // 更新内容
-      let html = ''
-      res.forEach((e) => {
-        html += MainContentTemplate(e)
+window.UploadImage = () => {
+  els.UploadController.click()
+}
+
+window.PrevPage = () => {
+  pageManager.prevPage()
+}
+
+window.NextPage = () => {
+  pageManager.nextPage()
+}
+
+window.ToggleFavorite = (id) => {
+  const itemEl = document.querySelector(`main div.item[data-id="${id}"]`)
+  const group = itemEl.getAttribute('data-group')
+
+  if (group === 'favorite') {
+    requestUnMarkImage(id, 'favorite').then(() => {
+      if (pageManager.group === 'favorite') {
+        itemEl.remove()
+      }
+      else {
+        itemEl.querySelector('div.favicon').classList.remove('fill')
+      }
+    })
+  }
+  else {
+    requestMarkImage(id, 'favorite').then(() => {
+      itemEl.querySelector('div.favicon').classList.add('fill')
+    })
+  }
+}
+
+window.DownloadImage = (fileName) => {
+  const a = document.createElement('a')
+  a.href = `./img/origin/fileName`
+  a.download = fileName
+  a.style.display = 'none'
+  document.body.appendChild(a)
+  a.click()
+  a.remove()
+}
+
+window.ViewImage = (fileName) => {
+  window.open(`./img/origin/${fileName}`, '_blank')
+}
+
+window.ShareImage = (fileName) => {
+  prompt('复制此链接分享即可', `${window.HostName}/img/origin/${fileName}`)
+}
+
+window.DeleteImage = (id) => {
+  if (confirm('确定删除？')) {
+    requestDeleteImage(id)
+      .then(() => {
+        document.querySelector(`main div.item[data-id="${id}"]`).remove()
+        alert('成功删除')
       })
-      El.mainContent.innerHTML = html
-    } else alert('到底啦！')
-  })
-})
-
-
-/**
- * 页码数据
- */
-window.Page = reactive(false, (target, key, newValue) => {
-  if (newValue < 0) return false
-
-  // 请求数据
-  reqImages(newValue, window.Mode.value).then((res) => {
-    if (res.length !== 0) {
-      // 应用修改
-      target[key] = newValue
-      // 更新页码显示
-      El.pageNumber.innerHTML = `第 ${newValue + 1} 页`
-      // 更新内容
-      let html = ''
-      res.forEach((e) => {
-        html += MainContentTemplate(e)
+      .catch((rea) => {
+        console.log(rea)
+        alert('发生了一个错误，请前往控制台查看详细错误信息。')
       })
-      El.mainContent.innerHTML = html
-    } else alert('到底啦！')
-  })
+  }
+}
+
+els.UploadController.addEventListener('change', (e) => {
+  if (e.target.files.length == 0) return
+  requestUploadImages(e.target.files)
+    .then((res) => {
+      alert('上传成功')
+    })
+    .catch(err => {
+      console.error(err)
+      alert('上传失败')
+    })
 })

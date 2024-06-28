@@ -2,6 +2,7 @@ const express = require('express')
 const session = require('express-session')
 const compression = require('compression')
 const morgan = require('morgan')
+const fse = require('fs-extra')
 const path = require('path')
 const app = express()
 
@@ -12,7 +13,15 @@ const imageRoute = require('./route/image')
  * 一些全局变量
  */
 global.staticPath = path.join(__dirname, './static')
-
+global.dataFilePath = './images.json'
+/**
+ * @type {{
+ *    id: string,
+ *    type: string,
+ *    group: string[]
+ * }[]}
+ */
+global.data = fse.readJsonSync(dataFilePath);
 
 /**
  * 配置中间件
@@ -39,7 +48,7 @@ app.use(session({
 /**
  * 配置路由
  */
-app.use('/api/img', imageRoute)
+app.use('/api/images', imageRoute)
 
 
 /**
