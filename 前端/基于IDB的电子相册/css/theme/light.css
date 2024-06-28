@@ -1,0 +1,15 @@
+:root {
+  --color: #000;
+  --page-bg: #eee;
+  --page-bg-reverse: #0002;
+  --page-bg-opactiy: #effbff66;
+  --text-color: #000;
+  --nav-bg: #eee;
+  --border-color: #ddd;
+  --shadow-light: #ccc;
+  --nav-shadow-light: #fff;
+  --nav-shadow-dark: #ccc;
+  --fillet: .8rem;
+  --prominent: #888;
+  --blur: 1rem;
+}

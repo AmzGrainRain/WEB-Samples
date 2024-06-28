@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>注册</title>
+    <link rel="stylesheet" href="./css/auth/index.css">
+    <!-- 库 -->
+    <link rel="stylesheet" href="./assets/fonts/boxicons-2.1.2/css/boxicons.min.css" />
+</head>
+
+<body>
+    <div class="bg"></div>
+
+    <main>
+        <div class="login">
+            <div class="content">
+                <h1>
+                    <span>用户注册<i class='bx bx-chevron-left'></i></span>
+                    <a href="./login.html"><span>用户登录</span></a>
+                </h1>
+                <input type="text" name="user" placeholder="用户名">
+                <div class="gender">
+                    <div style="--bg-color: #55f3" onclick="GenderCheck(this)">
+                        <input type="radio" name="gender">男
+                    </div>
+                    <div style="--bg-color: #f553" onclick="GenderCheck(this)">
+                        <input type="radio" name="gender">女
+                    </div>
+                </div>
+                <input type="password" name="password" placeholder="密码">
+                <input type="password" name="confirmPassword" placeholder="确认密码">
+                <div class="vf-code-area" title="点击刷新">
+                    <div class="box"></div>
+                    <input type="text" name="vfcode" class="vf-code-input" placeholder="输入验证码">
+                </div>
+                <input type="button" name="regist" value="注册">
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const GenderCheck = (e) => {
+            e.querySelector('input[type=radio]').checked = true;
+        }
+    </script>
+    <script type="module" src="./js/login_regist_public.js"></script>
+    <script type="module">
+        import { VerificationCode } from "./modules/VerificationCode.js";
+        import { UserManager } from "./modules/UserManager.js";
+
+        // Verification Code
+        const verificationCodeInstance = new VerificationCode();
+        const vfCodeArea = document.querySelector("main .vf-code-area .box");
+        vfCodeArea.innerHTML = verificationCodeInstance.generate(50, 50, 3);
+        vfCodeArea.addEventListener("click", () => {
+            vfCodeArea.innerHTML = verificationCodeInstance.generate(50, 50, 3);
+        });
+
+        const tryRegist = async () => {
+            const user = document.querySelector("input[name=user]").value;
+            const male = document.querySelector("body > main > div > div > div.gender > div:nth-child(1) input");
+            const female = document.querySelector("body > main > div > div > div.gender > div:nth-child(2) input");
+            const password = document.querySelector("input[name=password]").value;
+            const confirmPass = document.querySelector("input[name=confirmPassword]").value;
+            const vfcode = document.querySelector("input[name=vfcode]").value;
+
+            if (user.length == 0) {
+                alert("请输入用户名");
+                return;
+            }
+
+            if (!male.checked && !female.checked) {
+                alert("请勾选性别");
+                return;
+            }
+
+            if (password.length === 0) {
+                alert("请输入密码");
+                return;
+            }
+
+            if (password !== confirmPass) {
+                alert("密码不一致");
+                return;
+            }
+
+            if (!verificationCodeInstance.verify(vfcode)) {
+                alert("验证码错误");
+                vfCodeArea.innerHTML = verificationCodeInstance.generate(50, 50, 3);
+                return;
+            }
+
+            try {
+                const userManager = await UserManager.GetInstance();
+                const res = await userManager.getUser(user);
+                if (res !== undefined) {
+                    alert("用户名已存在");
+                    return;
+                }
+
+                await userManager.addUser(user, password, male.checked ? '男' : '女');
+                alert("注册成功");
+                location.href = "/login.html";
+                return;
+            }
+            catch (e) {
+                console.log(e)
+            }
+
+            alert("注册失败");
+            location.reload();
+        }
+
+        // Register
+        document.querySelector("input[name=regist]").addEventListener("click", tryRegist);
+        document.body.addEventListener('keyup', (e) => {
+            if (e.key === 'Enter') tryRegist();
+        })
+    </script>
+</body>
+
+</html>

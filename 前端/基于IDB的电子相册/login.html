@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录</title>
+    <link rel="stylesheet" href="./css/auth/index.css">
+    <!-- 库 -->
+    <link rel="stylesheet" href="./assets/fonts/boxicons-2.1.2/css/boxicons.min.css" />
+</head>
+
+<body>
+    <div class="bg"></div>
+
+    <main>
+        <div class="login">
+            <div class="content">
+                <h1>
+                    <span>用户登录<i class='bx bx-chevron-left'></i></span>
+                    <a href="./regist.html"><span>用户注册</span></a>
+                </h1>
+                <input type="text" name="user" placeholder="用户名">
+                <input type="password" name="password" placeholder="密码">
+                <div class="vf-code-area" title="点击刷新">
+                    <div class="box"></div>
+                    <input type="text" name="vfcode" class="vf-code-input" placeholder="输入验证码">
+                </div>
+                <input type="button" name="login" value="登录">
+            </div>
+        </div>
+    </main>
+
+    <marquee behavior="scroll" direction="left">请不要向任何人提供您的账号或密码，慎防上当受骗，切实保证您的账号安全。</marquee>
+
+    <script type="module" src="./js/login_regist_public.js"></script>
+    <script type="module">
+        import { VerificationCode } from "./modules/VerificationCode.js";
+        import { UserManager } from "./modules/UserManager.js";
+
+        // Verification Code
+        const verificationCodeInstance = new VerificationCode();
+        const vfCodeArea = document.querySelector("main .vf-code-area .box");
+        vfCodeArea.innerHTML = verificationCodeInstance.generate(50, 50, 3);
+        vfCodeArea.addEventListener("click", () => {
+            vfCodeArea.innerHTML = verificationCodeInstance.generate(50, 50, 3);
+        });
+
+        const tryLogin = async () => {
+            const user = document.querySelector("input[name=user]");
+            const password = document.querySelector("input[name=password]");
+            const vfcode = document.querySelector("input[name=vfcode]");
+
+            if (user.value.length == 0) {
+                alert("请输入用户名");
+                return;
+            }
+
+            if (password.value.length === 0) {
+                alert("请输入密码");
+                return;
+            }
+
+            if (!verificationCodeInstance.verify(vfcode.value)) {
+                alert("验证码错误");
+                vfcode.value = "";
+                vfCodeArea.innerHTML = verificationCodeInstance.generate(50, 50, 3);
+                return;
+            }
+
+            const userManager = await UserManager.GetInstance();
+            try {
+                const userInfo = await userManager.getUser(user.value);
+                if (userInfo === undefined) {
+                    alert("用户不存在");
+                    return;
+                }
+
+                if (userInfo.password === password.value) {
+                    alert("登录成功");
+                    sessionStorage.setItem("login", user.value);
+                    location.href = "/";
+                    return;
+                }
+            }
+            catch (e) {
+                console.log(e)
+            }
+
+            alert("账号或密码错误");
+            password.value = "";
+            vfcode.value = "";
+            vfCodeArea.innerHTML = verificationCodeInstance.generate(50, 50, 3);
+        }
+
+        // Login
+        document.querySelector("input[name=login]").addEventListener("click", tryLogin);
+        document.body.addEventListener('keyup', (e) => {
+            if (e.key === 'Enter') tryLogin();
+        })
+    </script>
+</body>
+
+</html>

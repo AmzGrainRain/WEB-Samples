@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>图库</title>
+    <meta name="keywords" content="关键词" />
+    <meta name="description" content="描述" />
+    <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" />
+    <!-- 样式 -->
+    <link id="theme" rel="stylesheet" data-mode="light" href="./css/theme/light.css" />
+    <link rel="stylesheet" href="./css/theme.css">
+    <link rel="stylesheet" href="./css/all.css" />
+    <link rel="stylesheet" href="./css/nav.css" />
+    <link rel="stylesheet" href="./css/main.css" />
+    <link rel="stylesheet" href="./css/preview.css">
+    <!-- 库 -->
+    <link rel="stylesheet" href="./assets/fonts/boxicons-2.1.2/css/boxicons.min.css" />
+</head>
+
+<body>
+    <!-- 导航栏 -->
+    <nav>
+        <ul class="left">
+            <li class="home active">
+                <span>
+                    <i class='bx bxs-home' style="color:#e55"></i>&nbsp;
+                    <a href="/" rel="noopener noreferrer">首页</a>
+                </span>
+                <div>
+                    <span>返回首页</span>
+                </div>
+            </li>
+            <li class="favorite">
+                <span>
+                    <i class='bx bxs-heart' style="color:#e55"></i>&nbsp;
+                    <a href="/favorite.html" rel="noopener noreferrer">收藏</a>
+                </span>
+                <div>
+                    <span>我的收藏</span>
+                </div>
+            </li>
+            <li class="user">
+                <span>
+                    <i class='bx bxs-user' style="color:#e55"></i>&nbsp;
+                    <a href="/user.html" rel="noopener noreferrer">用户</a>
+                </span>
+                <div>
+                    <span>用户详情</span>
+                </div>
+            </li>
+            <li class="logout" onclick="Logout()">
+                <span>
+                    <i class='bx bxs-log-in-circle' style="color:#e55"></i>&nbsp;
+                    <a href="/login.html" rel="noopener noreferrer">注销</a>
+                </span>
+                <div>
+                    <span>退出登录</span>
+                </div>
+            </li>
+        </ul>
+        <ul class="right">
+            <li class="prev">
+                <span>
+                    <i class="bx bxs-chevron-left"></i>
+                </span>
+            </li>
+            <li class="page">第 1 页</li>
+            <li class="next">
+                <span>
+                    <i class="bx bxs-chevron-right"></i>
+                </span>
+            </li>
+
+            <div class="to-page">
+                <div class="inner">
+                    <input id="jumpToPage" value="1" type="number">
+                    <input id="startJumpToPage" type="button" value="前往">
+                </div>
+            </div>
+        </ul>
+    </nav>
+
+    <!-- 内容 -->
+    <main>
+        <p>正在拼命获取图片...</p>
+    </main>
+
+    <!-- 主题切换 -->
+    <div id="switch-theme">
+        <i class='dark bx bxs-moon' style="display: none;"></i>
+        <i class='light bx bxs-sun' style="display: none;"></i>
+    </div>
+
+    <!-- 预览图片 -->
+    <div id="preview-image" class="show-preview">
+        <div class="close" onclick="CloseViewImage()">
+            <i class="bx bxs-x-circle"></i>
+        </div>
+        <img src="" alt="preview">
+    </div>
+
+    <input id="uploader" style="display: none;" type="file" accept="image/*" multiple>
+
+    <script type="module">
+        import els from "./js/Elements.js";
+        import { ThemeManager } from "./modules/ThemeManager.js";
+        import { ImageManager } from "./modules/ImageManager.js";
+        import { HomePageManager } from "./js/HomePageManager.js"
+        import { isLogin, logout } from "./modules/Authenticator.js";
+        import { ImageBoxTemplate } from "./js/ImageBoxTemplate.js";
+        import {
+            downloadImage,
+            viewImage,
+            closeViewImage,
+            shareImage
+        } from "./js/ImageBoxFunctions.js"
+
+        (async () => {
+            // 主题管理器
+            const themeManager = new ThemeManager();
+            els.ThemeSwitchButton.addEventListener("click", () => {
+                themeManager.switchTheme();
+            });
+
+            // 身份验证
+            const userName = isLogin();
+            if (!userName) {
+                alert("您还没有登录");
+                location.href = "/login.html";
+            }
+
+            // 图片管理器
+            const imageManager = await ImageManager.GetInstance(userName);
+
+            // 分页管理器
+            const pageManager = new HomePageManager(imageManager);
+            pageManager.update();
+            pageManager.handlePrev(els.PrevPageButton);
+            pageManager.handleNext(els.NextPageButton);
+
+            // 跳转到指定页码
+            els.JumpToPageBox.querySelector('input[type=button]').addEventListener('click', () => {
+                const pageNumber = parseInt(els.JumpToPageBox.querySelector('input[type=number]').value);
+                pageManager.to(pageNumber);
+            })
+
+            // 收藏图片/取消收藏
+            window.ToggleFavorite = async (id) => {
+                const itemEl = document.querySelector(`main div.item[image-id="${id}"]`);
+                const imageTag = itemEl.getAttribute("image-tag");
+                const newTag = imageTag === "favorite" ? "" : "favorite";
+                await imageManager.setImageTag(id, newTag);
+
+                if (newTag === "") {
+                    itemEl.querySelector("div.favicon").classList.remove("fill");
+                    itemEl.setAttribute("image-tag", newTag);
+                    return;
+                }
+                itemEl.querySelector("div.favicon").classList.add("fill");
+                itemEl.setAttribute("image-tag", newTag);
+            };
+        })();
+
+        // 模块作用域函数转发到全局
+        window.Logout = logout
+        window.DownloadImage = downloadImage
+        window.ViewImage = viewImage
+        window.CloseViewImage = closeViewImage
+        window.ShareImage = shareImage
+
+        let lastY = 0;
+        const nav = document.querySelector('body > nav');
+        const main = document.querySelector('main')
+
+        const showNav = () => {
+            nav.style.overflow = 'visible';
+            nav.style.height = '4rem';
+            main.style.height = 'calc(100% - 4rem)';
+        }
+
+        const hideNav = () => {
+            nav.style.overflow = 'hidden';
+            nav.style.height = '0';
+            main.style.height = '100%';
+        }
+
+        main.addEventListener('scroll', (e) => {
+            // 页面最顶部
+            if (e.target.scrollTop === 0) {
+                showNav();
+                return;
+            }
+
+            // 滚动方向
+            const isDown = e.target.scrollTop - lastY > 0 ? true : false;
+            if (isDown && e.target.scrollTop > nav.offsetHeight) {
+                hideNav();
+            }
+            else {
+                showNav();
+            }
+            lastY = e.target.scrollTop;
+        })
+    </script>
+</body>
+
+</html>

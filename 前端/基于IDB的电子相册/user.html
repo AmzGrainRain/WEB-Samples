@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>图库</title>
+    <meta name="keywords" content="关键词" />
+    <meta name="description" content="描述" />
+    <link rel="shortcut icon" href="./favicon.ico" type="image/x-icon" />
+    <!-- 样式 -->
+    <link id="theme" rel="stylesheet" data-mode="light" href="./css/theme/light.css" />
+    <link rel="stylesheet" href="./css/theme.css">
+    <link rel="stylesheet" href="./css/all.css" />
+    <link rel="stylesheet" href="./css/nav.css" />
+    <style>
+        nav ul.right {
+            display: none;
+        }
+
+        main {
+            padding: 1rem;
+            display: grid;
+            gap: 1rem;
+            grid-template-columns: repeat(3, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            height: calc(100% - 4rem);
+            font-size: 18px;
+            box-sizing: border-box;
+            overflow: hidden auto;
+            scroll-behavior: smooth;
+
+            &>section {
+                margin-bottom: 2rem;
+                padding: 2rem;
+                border-radius: 1rem;
+                box-shadow: 0.3rem 0.3rem 0.5rem var(--nav-shadow-dark), -0.2rem -0.2rem 0.5rem var(--nav-shadow-light);
+
+                &>h2.title {
+                    margin: 0 0 1.5rem 0;
+                    letter-spacing: 4px;
+                    font-weight: normal;
+                    font-size: 2rem;
+                }
+
+                &>ul {
+                    list-style: none;
+
+                    &>li {
+                        margin-bottom: 1rem;
+
+                        &>span {
+                            display: block;
+                        }
+
+                        &>span.label {
+                            padding-bottom: .5rem;
+                        }
+
+                        & input[type=password] {
+                            padding: 0 .5rem;
+                            width: 100%;
+                            height: 36px;
+                            color: inherit;
+                            border: 0;
+                            border-radius: .5rem;
+                            outline: none;
+                            background-color: transparent;
+                            box-sizing: border-box;
+                            box-shadow: 0.3rem 0.3rem 0.5rem var(--nav-shadow-dark), -0.2rem -0.2rem 0.5rem var(--nav-shadow-light);
+                        }
+                    }
+                }
+
+                & input[type=button],
+                & select {
+                    margin-top: .5rem;
+                    height: 36px;
+                    text-indent: 4px;
+                    letter-spacing: 4px;
+                    border: 0;
+                    border-radius: 10px;
+                    cursor: pointer;
+                    box-shadow: 0.3rem 0.3rem 0.5rem var(--nav-shadow-dark), -0.2rem -0.2rem 0.5rem var(--nav-shadow-light);
+                    outline: none;
+                    color: inherit;
+                    background-color: transparent;
+                }
+
+                & option {
+                    color: #000;
+                }
+
+                & input[type=button]:hover {
+                    box-shadow: inset 0.3rem 0.3rem 0.5rem var(--nav-shadow-dark), inset -0.3rem -0.3rem 0.5rem var(--nav-shadow-light);
+                }
+            }
+        }
+
+        @media screen and (max-width: 611px) {
+            main {
+                grid-template-columns: repeat(1, 1fr);
+                grid-template-rows: repeat(1, 1fr);
+            }
+        }
+
+        @media screen and (min-width: 612px) and (max-width: 1023px) {
+            main {
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: repeat(2, 1fr);
+            }
+        }
+
+        @media screen and (min-width: 1024px) and (max-width: 1365px) {
+            main {
+                grid-template-columns: repeat(3, 1fr);
+                grid-template-rows: repeat(3, 1fr);
+            }
+        }
+
+        @media screen and (min-width: 1366px) and (max-width: 1919px) {
+            main {
+                grid-template-columns: repeat(4, 1fr);
+                grid-template-rows: repeat(4, 1fr);
+            }
+        }
+
+        @media screen and (min-width: 1920px) {
+            main {
+                grid-template-columns: repeat(5, 1fr);
+                grid-template-rows: repeat(5, 1fr);
+            }
+        }
+    </style>
+    <!-- 库 -->
+    <link rel="stylesheet" href="./assets/fonts/boxicons-2.1.2/css/boxicons.min.css" />
+</head>
+
+<body>
+    <!-- 导航栏 -->
+    <nav>
+        <ul class="left">
+            <li class="home">
+                <span>
+                    <i class='bx bxs-home' style="color:#e55"></i>&nbsp;
+                    <a href="/" rel="noopener noreferrer">首页</a>
+                </span>
+                <div>
+                    <span>返回首页</span>
+                </div>
+            </li>
+            <li class="favorite">
+                <span>
+                    <i class='bx bxs-heart' style="color:#e55"></i>&nbsp;
+                    <a href="/favorite.html" rel="noopener noreferrer">收藏</a>
+                </span>
+                <div>
+                    <span>我的收藏</span>
+                </div>
+            </li>
+            <li class="user active">
+                <span>
+                    <i class='bx bxs-user' style="color:#e55"></i>&nbsp;
+                    <a href="/user.html" rel="noopener noreferrer">用户</a>
+                </span>
+                <div>
+                    <span>用户详情</span>
+                </div>
+            </li>
+            <li class="logout" onclick="Logout()">
+                <span>
+                    <i class='bx bxs-log-in-circle' style="color:#e55"></i>&nbsp;
+                    <a href="/login.html" rel="noopener noreferrer">注销</a>
+                </span>
+                <div>
+                    <span>退出登录</span>
+                </div>
+            </li>
+        </ul>
+        <ul class="right">
+            <li class="prev">
+                <span>
+                    <i class="bx bxs-chevron-left"></i>
+                </span>
+            </li>
+            <li class="page">第 1 页</li>
+            <li class="next">
+                <span>
+                    <i class="bx bxs-chevron-right"></i>
+                </span>
+            </li>
+        </ul>
+    </nav>
+
+    <!-- 内容 -->
+    <main>
+        <section class="user-info">
+            <h2 class="title">账号信息</h2>
+            <ul>
+                <li>
+                    <span class="label">账号</span>
+                    <span class="value" id="user"></span>
+                </li>
+                <li>
+                    <span class="label">性别</span>
+                    <span class="value" id="user-gender"></span>
+                </li>
+                <li>
+                    <span class="label" `>上次登录</span>
+                    <span class="value" id="last-login"></span>
+                </li>
+                <li>
+                    <span class="label" `>注册时间</span>
+                    <span class="value" id="regist-time"></span>
+                </li>
+            </ul>
+        </section>
+
+        <section class="change-password">
+            <h2 class="title">修改密码</h2>
+            <ul>
+                <li>
+                    <span class="label">原密码</span>
+                    <input class="value" id="origin-password" type="password" placeholder="请输入密码">
+                </li>
+                <li>
+                    <span class="label">新密码</span>
+                    <input class="value" id="new-password" type="password" placeholder="请输入密码">
+                </li>
+                <li>
+                    <span class="label">确认密码</span>
+                    <input class="value" id="confirm-password" type="password" placeholder="请输入密码">
+                </li>
+            </ul>
+            <input type="button" value="提交更改" onclick="ChangePassword()">
+        </section>
+
+        <section class="change-password">
+            <h2 class="title">注销账号</h2>
+            <p>账号注销后，将从数据库彻底删除账户信息。其中包含你已收藏的图片信息等。请谨慎操作，三思而后行。</p>
+            <ul>
+                <li>
+                    <span class="label">注销原因</span>
+                    <span class="value">
+                        <select id="unregist-reason">
+                            <option value="不好用">担心数据泄漏</option>
+                            <option value="不好用">不好用</option>
+                            <option value="不好用">我不想告知注销原因</option>
+                        </select>
+                    </span>
+                </li>
+            </ul>
+            <input type="button" value="注销账号" onclick="Unregist()">
+        </section>
+    </main>
+
+    <!-- 主题切换 -->
+    <div id="switch-theme">
+        <i class='dark bx bxs-moon' style="display: none;"></i>
+        <i class='light bx bxs-sun' style="display: none;"></i>
+    </div>
+
+    <script type="module">
+        import els from "./js/Elements.js";
+        import { ThemeManager } from "./modules/ThemeManager.js";
+        import { UserManager } from "./modules/UserManager.js";
+        import { ImageManager } from "./modules/ImageManager.js";
+        import { HomePageManager } from "./js/HomePageManager.js"
+        import { isLogin, logout } from "./modules/Authenticator.js";
+
+        (async () => {
+            // 主题管理器
+            const themeManager = new ThemeManager();
+            els.ThemeSwitchButton.addEventListener("click", () => {
+                themeManager.switchTheme();
+            });
+
+            // 身份验证
+            const userName = isLogin();
+            if (!userName) {
+                alert("您还没有登录");
+                location.href = "/login.html";
+            }
+
+            // 用户信息
+            const userManager = await UserManager.GetInstance();
+            const user = await userManager.getUser(userName);
+
+            // 用户名
+            document.querySelector('#user').innerHTML = userName;
+            // 用户性别
+            document.querySelector('#user-gender').innerHTML = user.gender;
+            // 上次登录
+            document.querySelector('#last-login').innerHTML = new Date(user.lastLogin);
+            // 注册时间
+            document.querySelector('#regist-time').innerHTML = new Date(user.registTime);
+
+            // 修改密码
+            const changePassword = async () => {
+                const oldPasswd = document.querySelector('#origin-password');
+                const newPasswd = document.querySelector('#new-password');
+                const confirmPasswd = document.querySelector('#confirm-password');
+
+                if (oldPasswd.value !== user.password) {
+                    alert("密码错误");
+                    return;
+                }
+
+                if (newPasswd.value.length == 0) {
+                    alert("请输入新的密码");
+                    return;
+                }
+
+                if (newPasswd.value !== confirmPasswd.value) {
+                    alert("两次输入的密码不一致");
+                    return;
+                }
+
+                user.password = newPasswd.value;
+                await userManager.updateUser(user);
+
+                logout();
+                location.href = "/login.html";
+            }
+
+            // 注销账号
+            const unregist = async () => {
+                if (!confirm("最后一次警告，您即将注销您的账号，确定继续？")) {
+                    alert("取消操作");
+                    return;
+                }
+
+                await userManager.removeUser(userName);
+                console.log(`用户注销了账号，原因：${document.querySelector('#unregist-reason').value}`)
+                logout();
+                alert("期待您再次使用，有缘再见！");
+                location.href = "/regist.html";
+            }
+
+            window.ChangePassword = changePassword;
+            window.Unregist = unregist;
+        })();
+
+        // 模块作用域函数转发到全局
+        window.Logout = logout
+    </script>
+</body>
+
+</html>
